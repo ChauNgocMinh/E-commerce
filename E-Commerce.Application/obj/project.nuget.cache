@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "t7v8CyA+xlPqSuPREHMQmAdSMkB8in/dxRt+O5Z3gkqE4UmOna3nv+f6rFP7EZS/9UyNYhH95wR76HyDkHyAzA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\E-Commerce\\E-Commerce.Application\\E-Commerce.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.17\\microsoft.windowsdesktop.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.17\\microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.17\\microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}
