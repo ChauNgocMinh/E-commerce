@@ -1,0 +1,56 @@
+# Các thư mục .NET tạm thời
+bin/
+obj/
+
+# Tệp tin của người dùng và môi trường
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Thư mục liên quan đến cấu hình và môi trường
+*.vs/
+*.config
+*.env
+.DS_Store
+
+# Thư mục chứa các file tạm thời của hệ thống
+[Tt]emp/
+[Tt]humbs.db
+
+# Các file và thư mục của hệ thống
+*.log
+*.lock
+*.pdb
+*.mdb
+*.opendb
+*.ldb
+
+# Các thư mục đầu ra build và phát hành
+[Bb]uild/
+[Ll]ogs/
+[Dd]ebug/
+[Rr]elease/
+
+# Tệp khóa và mật khẩu
+*.key
+*.pfx
+*.publishsettings
+
+# Thư mục chứa các bản sao restore nuget
+packages/
+.nuget/
+
+# Thư mục chứa các file cục bộ không cần thiết
+localhistory/
+
+# Thư mục ẩn trong Mac OS
+*.DS_Store
+.AppleDouble
+
+# Thư mục tạm thời trong IDE khác
+.idea/
+appsettings.json
