@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Images\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Common\" />
   </ItemGroup>
 
   <ItemGroup>

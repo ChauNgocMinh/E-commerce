@@ -11,6 +11,8 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 
 builder.Services.InstallServicesInAssembly(builder.Configuration);
 
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 DbInitializer.InitializeDatabase(app);

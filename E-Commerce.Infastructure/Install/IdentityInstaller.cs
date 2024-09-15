@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using E_Commerce.Infastructure.DbContexts;
 using Microsoft.AspNetCore.Identity;
+using E_Commerce.Domain.Entities.Roles;
 
 namespace E_Commerce.Infastructure.Install
 {
@@ -10,7 +11,7 @@ namespace E_Commerce.Infastructure.Install
 	{
 		public void InstallServices(IServiceCollection services, IConfiguration configuration)
 		{
-			services.AddIdentity<User, IdentityRole>()
+			services.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<ApplicationDbContext>() 
 				.AddDefaultTokenProviders();
 		}
