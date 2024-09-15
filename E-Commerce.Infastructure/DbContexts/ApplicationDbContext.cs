@@ -17,6 +17,7 @@ namespace E_Commerce.Infastructure.DbContexts
 		public DbSet<ProductImage> ProductImages { get; set; }
 		public DbSet<ProductFeedBack> ProductFeedBacks { get; set; }
 		public DbSet<NumberLikeProduct> NumberLikeProducts { get; set; } 
+		public DbSet<LikeFeedBack> LikeFeedBacks { get; set; } 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
@@ -84,6 +85,25 @@ namespace E_Commerce.Infastructure.DbContexts
 				entity.HasOne(i => i.Product)
 					  .WithMany() 
 					  .HasForeignKey(i => i.ProductId); 
+
+				entity.HasOne(i => i.User)
+					  .WithMany() 
+					  .HasForeignKey(i => i.UserId);
+			});
+
+			modelBuilder.Entity<LikeFeedBack>(entity =>
+			{
+				entity.HasKey(i => i.Id); 
+
+				entity.Property(i => i.ProductFeedBackId)
+					  .IsRequired(); 
+
+				entity.Property(i => i.UserId)
+					  .IsRequired(); 
+
+				entity.HasOne(i => i.ProductFeedBack)
+					  .WithMany() 
+					  .HasForeignKey(i => i.ProductFeedBackId); 
 
 				entity.HasOne(i => i.User)
 					  .WithMany() 
