@@ -4,14 +4,14 @@
     "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj": {
+    "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\E-Commerce.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj",
-        "projectName": "E-Commerce.Infastructure",
-        "projectPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\E-Commerce.Domain.csproj",
+        "projectName": "E-Commerce.Domain",
+        "projectPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\E-Commerce.Domain.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,115 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj",
+        "projectName": "E-Commerce.Infastructure",
+        "projectPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\E-Commerce.Infastructure.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Infastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\E-Commerce.Domain.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Documents\\Dự án\\e-commerce\\E-Commerce.Domain\\E-Commerce.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -7,4 +7,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Cqrs\Commands\" />
+    <Folder Include="Cqrs\Handler\" />
+    <Folder Include="Cqrs\Queries\" />
+    <Folder Include="AutoMapping\" />
+    <Folder Include="Response\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
 </Project>
