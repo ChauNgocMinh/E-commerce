@@ -21,7 +21,18 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult Rank()
+    {
+        return View();
+    }
+    public IActionResult Account()
+    {
+        return View();
+    }
+    public IActionResult Collection()
+    {
+        return View();
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

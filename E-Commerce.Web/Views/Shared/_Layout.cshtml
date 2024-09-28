@@ -6,44 +6,182 @@
     <title>@ViewData["Title"] - E_Commerce</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    @*     <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
+    *@
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_Commerce</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    @* <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_Commerce</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav>
+    </header> *@
+    <div class="header">
+        <div class="nav">
+            <!-- nav-1 -->
+            <div class="nav-1 d-flex justify-content-around align-items-center">
+                <!-- Logo -->
+                <div>
+                    <a class="nav-logo" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="./Logo_SNAT.jpg" alt="Logo SNAT" style="width: 50px;" />
+                    </a>
+                </div>
+
+                <div class="nav-search">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i> <!-- Biểu tượng tìm kiếm -->
+                </div>
+
+
+                <!-- Menu -->
+                <div class="nav-menu">
+                    <ul class="nav-list-items d-flex list-unstyled m-0">
+                        <li class="nav-item d-flex align-items-center mx-2">
+                            <i class="far fa-bookmark"></i>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Rank">Hạng</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item d-flex align-items-center mx-2">
+                            <i class="far fa-user"></i>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Account">Tài khoản</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center mx-2">
+                            <i class="fas fa-shopping-bag"></i>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Collection">Bộ sưu tập</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
+
+            <!-- nav-2 -->
+            <div class="nav-2">
+                <ul class="nav-list-items d-flex  list-unstyled m-0">
+                    <li class="nav-item ">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">ĐỀ XUẤT</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HÀNH ĐỘNG</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">TÌNH CẢM</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HOẠT HÌNH</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">THÊM...</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <img src="./hinhnen.jpg" />
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - E_Commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <div class="footer d-flex justify-content-around ">
+        <ul class="footer-order ">
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Company</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">About</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">FAQ</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Resources</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Contact Us</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Site Map</a>
+            </li>
+        </ul>
+
+        <ul class="footer-order">
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Shop</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Shipping</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Prescription</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Warantly & Returns</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Mask Assurance</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Manufactures</a>
+            </li>
+        </ul>
+
+        <ul class="footer-order">
+            <li class="footer-item mx-2 ">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Get Help</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Reward Points</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">No Prescription?</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">CPAP Rental</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">New To CPAP</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Privacy Policy</a>
+            </li>
+        </ul>
+
+        <ul class="footer-order">
+            <li class="footer-item mx-2 ">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Sign Up for Our Newsletter</a>
+            </li>
+            <li class="footer-item mx-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Be the first to know about our News and Great Deals!</a>
+            </li>
+            <li class="footer-item mx-2 mt-3">
+                <input placeholder="Enter Email" />
+                <button>Sign Up</button>
+            </li>
+        </ul>
+
+
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>
+</html>.Đây là đoạn cshtml và ở trên là đoạn css 

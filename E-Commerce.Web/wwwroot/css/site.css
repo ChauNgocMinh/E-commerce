@@ -1,4 +1,4 @@
-html {
+﻿/*html {
   font-size: 14px;
 }
 
@@ -19,4 +19,129 @@ html {
 
 body {
   margin-bottom: 60px;
+}*/
+* {
+    margin: 0px;
+    padding: 0px;
 }
+
+body {
+    width: 100vw;
+    background-color: #ffff;
+}
+
+.header {
+    width: 100%;
+    height: auto;
+    background-color: #f8f9fa; /* Màu nền tổng thể cho header */
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.nav-1 {
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff; /* Màu nền cho nav-1 */
+}
+
+.nav-2 {
+    width: 100%;
+    background-color: #615C99; /* Màu nền cho nav-2 */
+}
+
+.nav-logo img {
+    width: 50px;
+}
+
+.nav-search {
+    position: relative;
+    font-size: 16px;
+}
+
+    .nav-search input {
+        width: 400px;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+        padding-left: 40px; /* Tạo khoảng trống cho icon */
+        font-size: 16px;
+    }
+
+    .nav-search i {
+        position: absolute;
+        top: 50%;
+        left: 15px; /* Điều chỉnh vị trí của icon */
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #ccc;
+    }
+
+.nav-1 a.nav-link {
+    color: #000000;
+}
+
+.nav-2 a.nav-link {
+    color: #ffff;
+}
+
+/* Hiệu ứng khi di chuột qua liên kết */
+.nav-1 a.nav-link:hover {
+    text-decoration: underline;
+}
+
+.nav-2 a.nav-link:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+
+.container {
+    min-width: 100%; /* Đảm bảo container chiếm toàn bộ chiều ngang */
+}
+
+    .container img {
+        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều ngang container */
+        height: 500px; /* Giữ tỷ lệ khung hình của ảnh */
+        background-size: cover;
+    }
+
+.footer-order {
+    list-style: none;
+}
+
+    .footer-order .footer-item:first-child {
+        color: #000000;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+.footer-link {
+    text-decoration: none;
+    color: #555555;
+    height: 200px;
+}
+
+    .footer-link:hover {
+        color: #000000;
+    }
+
+.footer-order input {
+    text-align: center;
+    border-radius: 50px;
+    border-right: none;
+    border: solid 1px #555555;
+}
+
+.footer-order button {
+    background-color: #F0592A;
+    color: #ffff;
+    width: 150px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    border: none;
+}
+
+.Đoạn css này bạn thấy nó tối ưu với cshtml này của tôi không. Với nó đáp ứng reponsive cho các thiết bị khác không. Nếu sai sót chỗ nào fix lại cho hoàn chỉnh giúp tôi với
