@@ -54,3 +54,8 @@ localhistory/
 # Thư mục tạm thời trong IDE khác
 .idea/
 
+# Thư mục lưu trữ tạm thời cho các project Xamarin
+Xamarin/
+
+# Các tệp cục bộ cho ứng dụng Azure
+appsettings.*.json
