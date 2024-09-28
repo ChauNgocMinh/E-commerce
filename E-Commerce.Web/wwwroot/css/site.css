@@ -101,22 +101,17 @@ a {
     min-width: 100%; /* Đảm bảo container chiếm toàn bộ chiều ngang */
 }
 
-    .container img {
-        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều ngang container */
-        height: 500px; /* Giữ tỷ lệ khung hình của ảnh */
-        background-size: cover;
-    }
 
 .footer-order {
     list-style: none;
 }
 
-    .footer-order .footer-item:first-child {
-        color: #000000;
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+.footer-order .footer-item:first-child {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 .footer-link {
     text-decoration: none;
