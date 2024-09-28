@@ -61,5 +61,5 @@ Xamarin/
 appsettings.*.json
 
 # Bỏ theo dõi AssemblyInfo.cs và AssemblyInfoInput.cache
-AssemblyInfo.cs
-AssemblyInfoInput.cache
+**/AssemblyInfo.cs
+**/AssemblyInfoInput.cache
