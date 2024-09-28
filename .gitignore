@@ -59,3 +59,7 @@ Xamarin/
 
 # Các tệp cục bộ cho ứng dụng Azure
 appsettings.*.json
+
+# Bỏ theo dõi AssemblyInfo.cs và AssemblyInfoInput.cache
+AssemblyInfo.cs
+AssemblyInfoInput.cache
