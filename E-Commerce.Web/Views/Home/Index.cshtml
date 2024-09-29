@@ -1,6 +1,150 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div>
-    okk 
+<style>
+    .banner-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .banner {
+        width: 100%;
+        height: 670px;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 20px;
+        width: 500px;
+        color: black;
+    }
+
+    .btn-watch {
+        background-color: #F0592A;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 0 70px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 16px;
+        height: 50px;
+        font-weight: bold;
+    }
+
+    .conten-main {
+        height: 37px;
+    }
+
+    .filter {
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 16px;
+        width: 240px;
+    }
+
+    .filter h4 {
+        margin-bottom: 12px;
+    }
+
+    .checkbox-group label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form-control.rounded {
+        border-radius: 25px 0 0 25px; 
+    }
+
+    .input-group .btn {
+        border-radius: 0 25px 25px 0; 
+    }
+
+    .btn{
+        background-color: white !important;
+        border-left: none;
+        border-color: black;
+        color: black !important;
+    }
+
+    .form-control{
+        border-radius: 25px 0 0 25px !important;
+        border-color: black;
+    }
+
+    .keyword {
+        display: flex;
+        gap: 10px;
+    }
+
+    .keyword-item {
+        background-color: #f0f0f0;
+        padding: 5px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, font-weight 0.3s ease;
+    }
+
+    .keyword-item:hover {
+        background-color: #F5F5F5;
+        color: #757575;
+    }
+
+    .keyword-item.selected {
+        background-color: #2C2C2C;
+        color: white;
+        font-weight: bold;
+    }
+
+</style>
+<div class="banner-container">
+    <img class="banner" src="./Img/banner.jpg" alt="Nonton Godzilla x Kong" />
+    <div class="overlay">
+        <h1>Nonton Godzilla x Kong</h1>
+        <p>Godzilla x Kong: Đế chế mới là một bộ phim điện ảnh Mỹ thuộc thể loại quái vật ra mắt năm 2024 được đạo diễn bởi Adam Wingard. Phim do hãng Legendary Pictures và Warner Bros.</p>
+        <button class="btn-watch">Xem ngay</button>
+    </div>
+</div>
+
+<div style="margin-top: 50px" class="container-xxl">
+    <div class="row justify-content-around">
+        <div class="filter col-3">
+            <h4>Filter Options</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> Option 1</label>
+                <label><input type="checkbox"> Option 2</label>
+                <label><input type="checkbox"> Option 3</label>
+                <label><input type="checkbox"> Option 4</label>
+            </div>
+            <h4>Filter Options</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> Option 1</label>
+                <label><input type="checkbox"> Option 2</label>
+                <label><input type="checkbox"> Option 3</label>
+                <label><input type="checkbox"> Option 4</label>
+            </div>
+        </div>
+        <div class="conten-main col-8 row justify-content-between">
+            <div class="search-conten col-4">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="keyword col-4">
+                <span class="keyword-item selected">New</span>
+                <span class="keyword-item">Date</span>
+                <span class="keyword-item">Rating</span>
+            </div>
+        </div>
+    </div>
 </div>
