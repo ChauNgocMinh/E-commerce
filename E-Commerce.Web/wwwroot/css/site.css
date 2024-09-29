@@ -26,7 +26,8 @@ body {
 }
 
 body {
-    width: 100vw;
+    width: 100%         ;
+    max-width: 100vw;
     background-color: #ffff;
 }
 
@@ -61,22 +62,22 @@ a {
     font-size: 16px;
 }
 
-    .nav-search input {
-        width: 400px;
-        border: 1px solid #ccc;
-        border-radius: 50px;
-        padding-left: 40px; /* Tạo khoảng trống cho icon */
-        font-size: 16px;
-    }
+.nav-search input {
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding-left: 40px; /* Tạo khoảng trống cho icon */
+    font-size: 16px;
+}
 
-    .nav-search i {
-        position: absolute;
-        top: 50%;
-        left: 15px; /* Điều chỉnh vị trí của icon */
-        transform: translateY(-50%);
-        font-size: 16px;
-        color: #ccc;
-    }
+.nav-search i {
+    position: absolute;
+    top: 50%;
+    left: 15px; /* Điều chỉnh vị trí của icon */
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ccc;
+}
 
 .nav-1 a.nav-link {
     color: #000000;
