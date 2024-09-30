@@ -39,15 +39,12 @@
         font-weight: bold;
     }
 
-    .conten-main {
-        height: 37px;
-    }
-
     .filter {
         border: 1px solid black;
         border-radius: 8px;
         padding: 16px;
         width: 240px;
+        height: fit-content;
     }
 
     .filter h4 {
@@ -67,7 +64,7 @@
         border-radius: 0 25px 25px 0; 
     }
 
-    .btn{
+    .btn-search {
         background-color: white !important;
         border-left: none;
         border-color: black;
@@ -103,6 +100,13 @@
         font-weight: bold;
     }
 
+    .movie-cart {
+        margin: 20px 0;
+    }
+
+    .title-movie{
+        color: black;
+    }
 </style>
 <div class="banner-container">
     <img class="banner" src="./Img/banner.jpg" alt="Nonton Godzilla x Kong" />
@@ -114,8 +118,8 @@
 </div>
 
 <div style="margin-top: 50px" class="container-xxl">
-    <div class="row justify-content-around">
-        <div class="filter col-3">
+    <div class="row justify-content-between">
+        <div class="filter ">
             <h4>Filter Options</h4>
             <div class="checkbox-group">
                 <label><input type="checkbox"> Option 1</label>
@@ -131,19 +135,72 @@
                 <label><input type="checkbox"> Option 4</label>
             </div>
         </div>
-        <div class="conten-main col-8 row justify-content-between">
-            <div class="search-conten col-4">
-                <div class="input-group">
-                    <input type="text" class="form-control rounded" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div class="conten-main col-9">
+            <div class="row justify-content-between">
+                <div class="search-conten col-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control rounded" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button class="btn btn-search btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
                 </div>
+                <div class="keyword col-4">
+                    <span class="keyword-item selected">New</span>
+                    <span class="keyword-item">Date</span>
+                    <span class="keyword-item">Rating</span>
+                </div>
             </div>
-            <div class="keyword col-4">
-                <span class="keyword-item selected">New</span>
-                <span class="keyword-item">Date</span>
-                <span class="keyword-item">Rating</span>
+            <div class="row movie-cart ">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
+                        <div class="card-body">
+                            <h5><a asp-area="" asp-controller="Home" asp-action="">movie 1</a></h5>
+                            <div class="keyword">
+                                <span class="keyword-item selected">Fee</span>
+                                <span class="keyword-item">Date</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 2">
+                        <div class="card-body">
+                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="">movie 1</a></h5>
+                            <div class="keyword">
+                                <span class="keyword-item selected">Fee</span>
+                                <span class="keyword-item">Trung Quốc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 3">
+                        <div class="card-body">
+                            <h5><a asp-area="" asp-controller="Home" asp-action="">movie 1</a></h5>
+                            <div class="keyword">
+                                <span class="keyword-item">Date</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 4">
+                        <div class="card-body">
+                            <h5><a asp-area="" asp-controller="Home" asp-action="">movie 1</a></h5>
+                            <div class="keyword">
+                                <span class="keyword-item selected">Fee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
