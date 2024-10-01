@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Product Detail Page";
+}
+<style>
+    *{
+        margin:0px;
+        padding:0px;
+        list-style:none;
+        font-size:16px;
+    }
+    a{
+        text-decoration:none;
+    }
+
+    .description-Right ul li{
+        background-color:black;
+        width:auto;
+        color:white;
+    }
+    .description-Right button{
+        width:100%;
+        background-color:black;
+        color:white;
+        padding:10px;
+        border-radius:10px;
+    }
+
+    .custom-border {
+        border: 1px solid black; 
+        border-radius: 0.5rem;
+    }
+
+    .review ul {
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+    }
+    .review li {
+        flex: 0 0 30%; 
+        margin: 0 10px; 
+    }
+
+    .review ul .custom-border img {
+        border-radius: 50%; /* Đặt border-radius bằng 50% để tạo hình tròn */
+        object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+    }
+
+
+
+    .filmRecommand ul {
+        display: flex; /* Sử dụng flexbox */
+        flex-wrap: wrap; /* Để cho phép các phần tử xuống dòng khi không đủ không gian */
+        justify-content: center; /* Căn giữa các phần tử */
+        padding: 0; /* Loại bỏ padding mặc định của ul */
+    }
+
+    .filmRecommand li {
+        flex: 1 1 200px; /* Chiều rộng tối thiểu 200px, có thể co lại hoặc mở rộng */
+        margin: 10px; /* Khoảng cách giữa các phần tử */
+        max-width: 250px; /* Đặt chiều rộng tối đa cho từng phần tử */
+    }
+
+        .filmRecommand li h7{
+            font-weight:bold;
+        }
+
+    .filmRecommand img {
+        max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của li */
+        height: auto; /* Giữ tỷ lệ khung hình của hình ảnh */
+    }
+
+</style>
+<div class="container mt-5">
+    <div class="description row justify-content-center">
+        <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
+            <img src="~/duongtrieuquysuluc.png" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
+        </div>
+
+        <div class="description-Right col-md-6 col-sm-12 d-flex flex-column justify-content-center">
+            <h3>Đường triều Qủy Sư Lục</h3>
+            <div class=" ">Tag</div>
+            <ul class="list-unstyled d-flex">
+                <li class="me-2 p-2 rounded-3">Cổ trang</li>
+                <li class="me-2 p-2 rounded-3">Hành động</li>
+                <li class="me-2 p-2 rounded-3">120 phút</li>
+            </ul>
+            <button>Xem ngay</button>
+            <div class="custom-border p-3 mt-3">
+                <h4>Giới thiệu</h4>
+                Đường Triều Quỷ Sự Lục 2: Tây Hành》 là một bộ phim trinh thám cổ trang do Bá Sam ("Đường Triều Quỷ Sự Lục - Ký Sự Chuyện Kỳ Dị Đường Triều") làm đạo diễn chính, với sự tham gia của Dương Húc Văn ("Đường Triều Qủy Sự Lục") và Dương Chí Cương ("Đường Triều Qủy Sự Lục") đảm nhận vai chính. Bộ phim được chuyển thể từ tiểu thuyết cùng tên của tác giả Nguy Phong Hoa, là phần thứ hai trong loạt truyện "Đường Triều Quỷ Sự Lục".
+            </div>
+        </div>
+    </div>
+
+    <div class="review mt-4">
+        <h4>Đánh giá</h4>
+        <ul class="list-unstyled">
+            <li class="me-2 p-2 rounded-3 mb-3 custom-border">
+                <h5>Review Title</h5>
+                <span>Review Body</span>
+                <div class="d-flex align-items-center mt-2">
+                    <img src="~/userreview.png" alt="" class="me-2" style="width: 50px; height: 50px;" />
+                    <span>Review Name</span>
+                </div>
+            </li>
+            <li class="me-2 p-2 rounded-3 mb-3 custom-border">
+                <h5>Review Title</h5>
+                <span>Review Body</span>
+                <div class="d-flex align-items-center mt-2">
+                    <img src="~/userreview.png" alt="" class="me-2" style="width: 50px; height: 50px;" />
+                    <span>Review Name</span>
+                </div>
+            </li>
+            <li class="me-2 p-2 rounded-3 mb-3 custom-border">
+                <h5>Review Title</h5>
+                <span>Review Body</span>
+                <div class="d-flex align-items-center mt-2">
+                    <img src="~/userreview.png" alt="" class="me-2" style="width: 50px; height: 50px;" />
+                    <span>Review Name</span>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="filmRecommand align-content-center">
+        <h2 class="text-center">Có thể bạn sẽ thích</h2>
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/lienhoalau.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Liên hoa lâu</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/duongtrieuquysuluc.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Đường triều Qủy Sự Lục</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/nannhankhonghoanhao.jpg" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Nạn nhân không hoàn hảo</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/thosantihon.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Thợ săn tí hon</h7>
+            </li>
+        </ul>
+    </div>
+
+</div>
