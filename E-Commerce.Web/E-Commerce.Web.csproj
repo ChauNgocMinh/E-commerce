@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Controllers\AdminSite\" />
     <Folder Include="Controllers\UserSite\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

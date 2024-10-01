@@ -21,15 +21,16 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Rank()
-    {
-        return View();
-    }
+  
     public IActionResult Account()
     {
         return View();
     }
-    public IActionResult Collection()
+    public IActionResult Login()
+    {
+        return View();
+    }
+    public IActionResult ProductDetail()
     {
         return View();
     }
