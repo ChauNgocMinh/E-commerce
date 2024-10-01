@@ -1,65 +1,63 @@
-# Các thư mục .NET tạm thời
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+
+# Thư mục build tạm thời
 bin/
 obj/
 
-# Tệp tin của người dùng và môi trường
-*.user
-*.userosscache
-*.suo
-*.sln.docstates
+# Thư mục xuất ra khi publish
+publish/
 
-# Visual Studio Code
+# Các tệp của Visual Studio
 .vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.csproj.pidb
 
-# Thư mục liên quan đến cấu hình và môi trường
-*.vs/
-*.config
-*.env
-.DS_Store
-
-# Thư mục chứa các file tạm thời của hệ thống
-[Tt]emp/
-[Tt]humbs.db
-
-# Các file và thư mục của hệ thống
-*.log
-*.lock
-*.pdb
-*.mdb
-*.opendb
-*.ldb
-
-# Các thư mục đầu ra build và phát hành
-[Bb]uild/
-[Ll]ogs/
-[Dd]ebug/
-[Rr]elease/
-
-# Tệp khóa và mật khẩu
-*.key
-*.pfx
-*.publishsettings
-
-# Thư mục chứa các bản sao restore nuget
+# Thư mục chứa các gói nuget đã restore
 packages/
-.nuget/
+*.nupkg
+*.snupkg
 
-# Thư mục chứa các file cục bộ không cần thiết
-localhistory/
+# File lock của NuGet
+project.lock.json
+project.fragment.lock.json
 
-# Thư mục ẩn trong Mac OS
+# Tệp log của Visual Studio
+*.log
+
+# File thuộc tính tạm thời khi sử dụng với Entity Framework
+*.Designer.cs
+*.edmx
+*.edmx.sql
+*_MigrationHistory*
+
+# Các file tạm của hệ điều hành
 *.DS_Store
-.AppleDouble
+*.bak
+*.tmp
+*.swp
 
-# Thư mục tạm thời trong IDE khác
-.idea/
+# Thư mục node_modules (nếu bạn sử dụng React, Angular)
+node_modules/
 
-# Thư mục lưu trữ tạm thời cho các project Xamarin
-Xamarin/
+# File bundle của webpack (nếu sử dụng)
+dist/
+build/
 
-# Các tệp cục bộ cho ứng dụng Azure
+# Thư mục xuất tạm thời của IIS
+IISExpress/
+AppData/
+
+# Các file chứa khóa bí mật
+appsettings.json
 appsettings.*.json
-
-# Bỏ theo dõi AssemblyInfo.cs và AssemblyInfoInput.cache
-**/AssemblyInfo.cs
-**/AssemblyInfoInput.cache
