@@ -7,26 +7,110 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    @*     <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
-    *@
+
+
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .navbar-toggler {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .navbar-toggler-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+        .form-control {
+            flex-grow: 1; /* Để thẻ input chiếm toàn bộ chiều rộng còn lại */
+            padding-right: 35px; /* Để tạo không gian cho icon bên phải */
+            padding-left: 30px; /* Để tạo không gian cho icon bên trái nếu cần */
+        }
+
+        .search-icon {
+            right: 100px; /* Khoảng cách từ bên phải */
+            top: 50%; /* Căn giữa theo chiều dọc */
+            transform: translateY(-50%); /* Căn giữa hoàn toàn */
+            color: #000; /* Màu sắc của icon */
+            pointer-events: none; /* Để không can thiệp vào sự kiện chuột */
+        }
+
+
+
+
+        .nav-1 {
+            padding: 10px;
+            height: auto;
+        }
+
+            .nav-1 img {
+                width: 200px;
+                height: 100px;
+            }
+
+        .nav-2 {
+            background-color: #615C99;
+            color: white;
+        }
+
+        .footer-order .btn-danger {
+            background-color: #F0592A !important;
+            color: white !important; /* Màu chữ */
+            border: none;
+            /* Tạo viền trái màu đen với độ dày 3px */
+            border-radius: 0 20px 20px 0 !important; /* Xóa bo tròn ở bên trái */
+        }
+
+            .footer-order .btn-danger:hover {
+                opacity: 0.9 /* Màu khi hover */
+            }
+
+    </style>
 </head>
-<style>
-    
-</style>
+
 <body>
     <div class="header">
         <div class="nav">
-            <div class="nav-1 d-flex justify-content-around align-items-center">
+            <div class="nav-1 d-flex flex-wrap justify-content-between align-items-center p-3">
                 <div>
                     <a class="nav-logo" asp-area="" asp-controller="Home" asp-action="Index">
+<<<<<<< HEAD
                         <img src="~/Img/Logo.png" alt="Logo SNAT" style="width: 166px;" />
+=======
+                        <img src="./Img/Logo.png" alt="Logo SNAT" />
+>>>>>>> 0eab3104b3d938d980e0923db2139b09feec9e33
                     </a>
                 </div>
 
-                <div class="nav-search">
-                    <input type="text" placeholder="Search...">
-                    <i class="fas fa-search"></i> 
+                <div class="nav-search d-flex flex-grow-1 mx-3 position-relative">
+                    <input type="text" class="form-control" placeholder="Search..." />
+                    <i class="fas fa-search position-absolute search-icon"></i>
                 </div>
+
+
+
+
+
+
                 <div class="nav-menu">
                     <ul class="nav-list-items d-flex list-unstyled m-0">
                         <li class="nav-item d-flex align-items-center mx-2">
@@ -45,8 +129,8 @@
                 </div>
             </div>
 
-            <!-- nav-2 -->
             <div class="nav-2">
+<<<<<<< HEAD
                 <ul class="container nav-list-items d-flex  list-unstyled m-0">
                     <li class="nav-item ">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetProductByCategory">ĐỀ XUẤT</a>
@@ -64,93 +148,121 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetProductByCategory">THÊM...</a>
                     </li>
                 </ul>
+=======
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav d-flex flex-wrap list-unstyled m-0">
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">ĐỀ XUẤT</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HÀNH ĐỘNG</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">TÌNH CẢM</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HOẠT HÌNH</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">THÊM...</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+>>>>>>> 0eab3104b3d938d980e0923db2139b09feec9e33
             </div>
+
+
         </div>
     </div>
     <div>
-        <main role="main">
+        <main role="main" class="container">
             @RenderBody()
         </main>
     </div>
 
-    <div class="footer d-flex justify-content-around ">
-        <ul class="footer-order ">
-            <li class="footer-item mx-2">
+    <div class="footer d-flex flex-wrap justify-content-around p-4">
+        <ul class="footer-order list-unstyled d-flex flex-column">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Company</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">About</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">FAQ</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Resources</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Contact Us</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Site Map</a>
             </li>
         </ul>
 
-        <ul class="footer-order">
-            <li class="footer-item mx-2">
+        <ul class="footer-order list-unstyled d-flex flex-column">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Shop</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Shipping</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Prescription</a>
             </li>
-            <li class="footer-item mx-2">
-                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Warantly & Returns</a>
+            <li class="footer-item mb-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Warranty & Returns</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Mask Assurance</a>
             </li>
-            <li class="footer-item mx-2">
-                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Manufactures</a>
+            <li class="footer-item mb-2">
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Manufacturers</a>
             </li>
         </ul>
 
-        <ul class="footer-order">
-            <li class="footer-item mx-2 ">
+        <ul class="footer-order list-unstyled d-flex flex-column">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Get Help</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Reward Points</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">No Prescription?</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">CPAP Rental</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">New To CPAP</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Privacy Policy</a>
             </li>
         </ul>
 
-        <ul class="footer-order">
-            <li class="footer-item mx-2 ">
+        <ul class="footer-order list-unstyled d-flex flex-column">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Sign Up for Our Newsletter</a>
             </li>
-            <li class="footer-item mx-2">
+            <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Be the first to know about our News and Great Deals!</a>
             </li>
-            <li class="footer-item mx-2 mt-3">
-                <input placeholder="Enter Email" />
-                <button>Sign Up</button>
+            <li class="footer-item mb-3 d-flex">
+                <input type="email" class="form-control" placeholder="Enter Email" />
+                <button class="btn btn-danger text-white">Sign Up</button>
             </li>
         </ul>
-
-
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
