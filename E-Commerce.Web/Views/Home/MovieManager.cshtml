@@ -1,11 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Movie Manager Page";
 }
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 <style>
     * {
-        padding: 0px;
-        margin: 0px;
+        padding: 0;
+        margin: 0;
         text-decoration: none;
     }
 
@@ -13,21 +16,28 @@
         position: relative;
     }
 
-        .input-group input {
-            padding-right: 30px; /* Để tạo không gian cho icon */
-            border-radius: 20px; /* Thay đổi giá trị theo ý muốn */
-        }
+         .input-group input {
+             padding-right: 30px; /* Khoảng cách cho icon */
+         }
 
     .input-icon {
         position: absolute;
-        right: 10px; /* Khoảng cách từ bên phải */
+        right: 40px; /* Khoảng cách cho icon tìm kiếm */
         top: 50%;
-        transform: translateY(-50%); /* Căn giữa theo chiều dọc */
-        pointer-events: none; /* Không ảnh hưởng đến sự kiện chuột */
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        color: #000;
     }
 
     .box {
-        border: 2px solid #000; /* Viền ngoài chung */
+        border: 2px solid #000;
         border-radius: 10px;
         padding: 10px;
         background-color: #F7F2FA;
@@ -39,36 +49,25 @@
     }
 
     .menu-item:hover {
-        background-color: #E8DEF8; /* Màu nền khi hover */
+        background-color: #E8DEF8;
         border-radius: 50px;
     }
 
-    .item {
-        padding: 10px 0;
-    }
-
-    .add-film .search input {
-        width: 100%;
-    }
-
-    /* Màu nền so le cho bảng */
     .bg-red {
         background-color: #F8F9FC;
-        color: black;
     }
 
     .bg-white {
         background-color: white;
-        color: black;
     }
 
     th {
-        background-color: #F8F9FC; /* Màu nền cho header */
-        color: black; /* Màu chữ cho header */
+        background-color: #F8F9FC;
+        color: black;
     }
 
     .action-menu {
-        display: none; /* Ban đầu ẩn menu */
+        display: none;
         position: absolute;
         background-color: white;
         width: 150px;
@@ -96,12 +95,8 @@
         <div class="col-md-4">
             <div class="menu rounded-3 p-3">
                 <h3 class="text-center">Menu</h3>
-                <div class="menu-item p-2 hover-bg">
-                    Quản lý phim
-                </div>
-                <div class="menu-item p-2 hover-bg">
-                    Quản lý người dùng
-                </div>
+                <div class="menu-item p-2">Quản lý phim</div>
+                <div class="menu-item p-2">Quản lý người dùng</div>
             </div>
         </div>
 
@@ -109,7 +104,7 @@
         <div class="col-md-7">
             <div class="box">
                 <!-- Tìm kiếm và Thêm phim -->
-                <div class="add-film d-flex justify-content-between align-content-center p-4">
+                <div class="add-film d-flex justify-content-between align-items-center p-4">
                     <div class="search flex-grow-1 mr-3">
                         <div class="input-group">
                             <input type="search" name="search" placeholder="Tìm kiếm" class="form-control" />
@@ -118,8 +113,7 @@
                             </span>
                         </div>
                     </div>
-
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addFilmModal">
                         <i class="fas fa-plus"></i> Thêm
                     </button>
                 </div>
@@ -146,20 +140,12 @@
                                     <td>Text</td>
                                     <td>Text</td>
                                     <td>Text</td>
-
-
-                                   @*  <td>Text @((i * 6) + 1)</td>
-                                    <td>Text @((i * 6) + 2)</td>
-                                    <td>Text @((i * 6) + 3)</td>
-                                    <td>Text @((i * 6) + 4)</td>
-                                    <td>Text @((i * 6) + 5)</td>
-                                    <td>Text @((i * 6) + 6)</td> *@
                                     <td class="position-relative">
                                         <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
                                         <div class="action-menu">
                                             <ul class="list-unstyled mb-0">
                                                 <li><a href="#" class="text-primary">Xem chi tiết</a></li>
-                                                <li><a href="#" class="text-warning">Sửa </a></li>
+                                                <li><a href="#" class="text-warning">Sửa</a></li>
                                                 <li><a href="#" class="text-danger">Xóa</a></li>
                                             </ul>
                                         </div>
@@ -174,19 +160,78 @@
     </div>
 </div>
 
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<!-- Modal -->
+<div class="modal fade" id="addFilmModal" tabindex="-1" role="dialog" aria-labelledby="addFilmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="addFilmModalLabel">Thêm Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="filmTitle">Tiêu đề</label>
+                        <input type="text" class="form-control" id="filmTitle" placeholder="Value">
+                    </div>
+                    <div class="form-group">
+                        <label for="filmGenre">Full video</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="filmGenre" placeholder="Video_Name" readonly>
+                            <div class="input-group-append">
+                                <input type="file" id="fileInput" style="display: none;" accept="video/*" />
+                                <span class="input-group-text" id="uploadIcon" style="cursor: pointer;">
+                                    <i class="fa-solid fa-paperclip"></i>
+                                </span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filmNote">Ghi chú</label>
+                        <input type="text" class="form-control" id="filmNote" placeholder="Value">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark w-100">Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+    // Tắt hiển thị menu khi nhấp vào icon
     document.querySelectorAll('.toggle-action-menu').forEach(item => {
-        item.addEventListener('click', event => {
+        item.addEventListener('click', () => {
             const actionMenu = item.nextElementSibling;
-            // Ẩn tất cả menu trước khi hiển thị menu hiện tại
             document.querySelectorAll('.action-menu').forEach(menu => {
                 if (menu !== actionMenu) {
                     menu.style.display = 'none';
                 }
             });
-            // Chuyển đổi hiển thị menu
             actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
         });
     });
+
+    // Tương tác với icon tải lên
+    document.getElementById('uploadIcon').onclick = () => {
+        document.getElementById('fileInput').click();
+    };
+
+    document.getElementById('fileInput').onchange = function () {
+        const fileName = this.value.split('\\').pop();
+        document.getElementById('filmGenre').value = fileName;
+    };
+
+    // Xóa tên video khi nhấn icon đóng
+    document.getElementById('closeIcon').onclick = () => {
+        document.getElementById('filmGenre').value = '';
+    };
 </script>
