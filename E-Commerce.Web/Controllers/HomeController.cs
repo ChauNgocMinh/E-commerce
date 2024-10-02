@@ -21,7 +21,10 @@ public class HomeController : Controller
     {
         return View();
     }
-  
+    public IActionResult Rank()
+    {
+        return View();
+    }
     public IActionResult Account()
     {
         return View();
@@ -31,6 +34,14 @@ public class HomeController : Controller
         return View();
     }
     public IActionResult ProductDetail()
+    {
+        return View();
+    }
+    public IActionResult MovieManager()
+    {
+        return View();
+    }
+    public IActionResult UserManager()
     {
         return View();
     }

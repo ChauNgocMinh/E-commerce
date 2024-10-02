@@ -1,0 +1,192 @@
+﻿@{
+    ViewData["Title"] = "Movie Manager Page";
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        text-decoration: none;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+        .input-group input {
+            padding-right: 30px; /* Để tạo không gian cho icon */
+            border-radius: 20px; /* Thay đổi giá trị theo ý muốn */
+        }
+
+    .input-icon {
+        position: absolute;
+        right: 10px; /* Khoảng cách từ bên phải */
+        top: 50%;
+        transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+        pointer-events: none; /* Không ảnh hưởng đến sự kiện chuột */
+    }
+
+    .box {
+        border: 2px solid #000; /* Viền ngoài chung */
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #F7F2FA;
+    }
+
+    .menu {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .menu-item:hover {
+        background-color: #E8DEF8; /* Màu nền khi hover */
+        border-radius: 50px;
+    }
+
+    .item {
+        padding: 10px 0;
+    }
+
+    .add-film .search input {
+        width: 100%;
+    }
+
+    /* Màu nền so le cho bảng */
+    .bg-red {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .bg-white {
+        background-color: white;
+        color: black;
+    }
+
+    th {
+        background-color: #F8F9FC; /* Màu nền cho header */
+        color: black; /* Màu chữ cho header */
+    }
+
+    .action-menu {
+        display: none; /* Ban đầu ẩn menu */
+        position: absolute;
+        background-color: white;
+        width: 150px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        right: 0;
+    }
+
+        .action-menu ul li {
+            padding: 5px 0;
+        }
+
+            .action-menu ul li a {
+                text-decoration: none;
+                color: black;
+                transition: color 0.3s;
+            }
+</style>
+
+<div class="container w-75 mt-5">
+    <div class="row justify-content-around">
+        <!-- Menu -->
+        <div class="col-md-4">
+            <div class="menu rounded-3 p-3">
+                <h3 class="text-center">Menu</h3>
+                <div class="menu-item p-2 hover-bg">
+                    Quản lý phim
+                </div>
+                <div class="menu-item p-2 hover-bg">
+                    Quản lý người dùng
+                </div>
+            </div>
+        </div>
+
+        <!-- Box -->
+        <div class="col-md-7">
+            <div class="box">
+                <!-- Tìm kiếm và Thêm phim -->
+                <div class="add-film d-flex justify-content-between align-content-center p-4">
+                    <div class="search flex-grow-1 mr-3">
+                        <div class="input-group">
+                            <input type="search" name="search" placeholder="Tìm kiếm" class="form-control" />
+                            <span class="input-icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Thêm
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Header 1</th>
+                                <th>Header 2</th>
+                                <th>Header 3</th>
+                                <th>Header 4</th>
+                                <th>Header 5</th>
+                                <th>Header 6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 16; i++)
+                            {
+                                <tr class="@(i % 2 == 0 ? "bg-red" : "bg-white")">
+                                    <td>Text</td>
+                                    <td>Text</td>
+                                    <td>Text</td>
+                                    <td>Text</td>
+                                    <td>Text</td>
+                                    <td>Text</td>
+
+
+                                   @*  <td>Text @((i * 6) + 1)</td>
+                                    <td>Text @((i * 6) + 2)</td>
+                                    <td>Text @((i * 6) + 3)</td>
+                                    <td>Text @((i * 6) + 4)</td>
+                                    <td>Text @((i * 6) + 5)</td>
+                                    <td>Text @((i * 6) + 6)</td> *@
+                                    <td class="position-relative">
+                                        <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
+                                        <div class="action-menu">
+                                            <ul class="list-unstyled mb-0">
+                                                <li><a href="#" class="text-primary">Xem chi tiết</a></li>
+                                                <li><a href="#" class="text-warning">Sửa </a></li>
+                                                <li><a href="#" class="text-danger">Xóa</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    document.querySelectorAll('.toggle-action-menu').forEach(item => {
+        item.addEventListener('click', event => {
+            const actionMenu = item.nextElementSibling;
+            // Ẩn tất cả menu trước khi hiển thị menu hiện tại
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                if (menu !== actionMenu) {
+                    menu.style.display = 'none';
+                }
+            });
+            // Chuyển đổi hiển thị menu
+            actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>

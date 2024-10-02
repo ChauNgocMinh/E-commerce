@@ -1,0 +1,205 @@
+﻿@{
+    ViewData["Title"] = "Movie Manager Page";
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        text-decoration: none;
+        list-style:none;
+    }
+ 
+    .input-group {
+        position: relative;
+    }
+
+        .input-group input {
+            padding-right: 30px; /* Để tạo không gian cho icon */
+            border-radius: 20px; /* Thay đổi giá trị theo ý muốn */
+        }
+
+    .input-icon {
+        position: absolute;
+        right: 10px; /* Khoảng cách từ bên phải */
+        top: 50%;
+        transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+        pointer-events: none; /* Không ảnh hưởng đến sự kiện chuột */
+    }
+
+    .box {
+        border: 1px solid #000; /* Viền ngoài chung */
+        height:400px;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #F7F2FA;
+    }
+
+    .menu {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .menu-item:hover {
+        background-color: #E8DEF8; /* Màu nền khi hover */
+        border-radius: 50px;
+    }
+
+    .item {
+        padding: 10px 0;
+    }
+
+    .add-film .search input {
+        width: 100%;
+    }
+
+    /* Màu nền so le cho bảng */
+    .bg-red {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .bg-white {
+        background-color: white;
+        color: black;
+    }
+
+    th {
+        background-color: #F8F9FC; /* Màu nền cho header */
+        color: black; /* Màu chữ cho header */
+    }
+
+    .action-menu {
+        display: none; /* Ban đầu ẩn menu */
+        position: absolute;
+        background-color: white;
+        width: 150px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        right: 0;
+    }
+
+        .action-menu ul li {
+            padding: 5px 0;
+        }
+
+            .action-menu ul li a {
+                text-decoration: none;
+                color: black;
+                transition: color 0.3s;
+            }
+
+    .custom-border {
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        text-align:center;
+    }
+
+    .order-user ul li{
+        width:150px;    
+    }
+    .filmRecommand ul {
+        display: flex; /* Sử dụng flexbox */
+        flex-wrap: wrap; /* Để cho phép các phần tử xuống dòng khi không đủ không gian */
+        justify-content: center; /* Căn giữa các phần tử */
+        padding: 0; /* Loại bỏ padding mặc định của ul */
+    }
+
+    .filmRecommand li {
+        flex: 1 1 200px; /* Chiều rộng tối thiểu 200px, có thể co lại hoặc mở rộng */
+        margin: 10px; /* Khoảng cách giữa các phần tử */
+        max-width: 250px; /* Đặt chiều rộng tối đa cho từng phần tử */
+    }
+
+        .filmRecommand li h7 {
+            font-weight: bold;
+        }
+
+    .filmRecommand img {
+        max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của li */
+        height: auto; /* Giữ tỷ lệ khung hình của hình ảnh */
+    }
+
+</style>
+
+<div class="container w-75 mt-5">
+    <div class="row justify-content-between">
+        <div class="col-md-4">
+            <div class="menu rounded-3 p-3">
+                <div class="menu-item p-2 hover-bg">
+                    Thông tin cá nhân
+                </div>
+                <div class="menu-item p-2 hover-bg">
+                    Đổi mật khẩu
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="box">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-3">
+                            <div class="img-User">
+                                <img src="~/userreview.png" alt="Alternate Text" class="img-fluid rounded-circle" />
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="info-User">
+                                <ul>
+                                    <li>Họ tên: Nguyễn Văn A</li>
+                                    <li>Tài khoản: nguyen.a</li>
+                                    <li>Email: nguyen.a@gmail.com</li>
+                                    <li>Hạng: Vip</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end align-items-start">
+                            <!-- Thêm align-items-start để căn trên cùng -->
+                            <div class="order-user">
+                                <ul class="list-unstyled">
+                                    <li class="custom-border bg-dark rounded-3 text-white mb-2 p-2">Đổi mật khẩu</li>
+                                    <li class="custom-border bg-primary rounded-3 text-white mb-2 p-2">Nạp vip</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="filmRecommand align-content-center">
+        <h2 class="text-center">Có thể bạn sẽ thích</h2>
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/lienhoalau.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Liên hoa lâu</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/duongtrieuquysuluc.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Đường triều Qủy Sự Lục</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/nannhankhonghoanhao.jpg" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Nạn nhân không hoàn hảo</h7>
+            </li>
+            <li class="me-2 p-2 rounded-3 custom-border">
+                <img src="~/thosantihon.png" alt="" style="max-width: 100%; height: auto;" />
+                <h7>Thợ săn tí hon</h7>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
