@@ -2,8 +2,6 @@
     ViewData["Title"] = "Movie Manager Page";
 }
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <style>
     * {
@@ -14,18 +12,37 @@
 
     .input-group {
         position: relative;
+        display: flex;
+        align-items: center;
     }
 
-         .input-group input {
-             padding-right: 30px; /* Khoảng cách cho icon */
-         }
+        /* Bo tròn 4 góc của input và thêm khoảng cách với nút "Thêm" */
+        .input-group input {
+            width: 100%;
+            padding-right: 40px; /* Khoảng cách cho icon */
+            border-radius: 25px; /* Bo tròn 4 góc */
+            padding-left: 15px;
+            border: 1px solid #ccc;
+        }
 
+    /* Icon tìm kiếm nằm bên phải bên trong input */
     .input-icon {
         position: absolute;
-        right: 40px; /* Khoảng cách cho icon tìm kiếm */
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        pointer-events: none;
+        color: #888;
+        pointer-events: none; /* Cho phép nhấn vào input mà không bị ảnh hưởng bởi icon */
+    }
+
+    /* Tăng khoảng cách giữa ô tìm kiếm và nút Thêm */
+    .add-film .search {
+        margin-right: 20px; /* Khoảng cách giữa ô tìm kiếm và nút "Thêm" */
+    }
+
+    /* Nút thêm */
+    .btn-primary {
+        border-radius: 25px; /* Bo tròn nút "Thêm" để đồng nhất với ô tìm kiếm */
     }
 
     .close-icon {
@@ -51,6 +68,7 @@
     .menu-item:hover {
         background-color: #E8DEF8;
         border-radius: 50px;
+        cursor:pointer;
     }
 
     .bg-red {
@@ -91,7 +109,6 @@
 
 <div class="container w-75 mt-5">
     <div class="row justify-content-around">
-        <!-- Menu -->
         <div class="col-md-4">
             <div class="menu rounded-3 p-3">
                 <h3 class="text-center">Menu</h3>
@@ -100,10 +117,8 @@
             </div>
         </div>
 
-        <!-- Box -->
         <div class="col-md-7">
             <div class="box">
-                <!-- Tìm kiếm và Thêm phim -->
                 <div class="add-film d-flex justify-content-between align-items-center p-4">
                     <div class="search flex-grow-1 mr-3">
                         <div class="input-group">
@@ -204,8 +219,7 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     // Tắt hiển thị menu khi nhấp vào icon
     document.querySelectorAll('.toggle-action-menu').forEach(item => {

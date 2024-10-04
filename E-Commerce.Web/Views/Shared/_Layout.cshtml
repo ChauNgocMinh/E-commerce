@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-
-
     <style>
         * {
             margin: 0px;
@@ -38,8 +36,6 @@
             height: 100%;
         }
 
-
-
         .form-control {
             flex-grow: 1; /* Để thẻ input chiếm toàn bộ chiều rộng còn lại */
             padding-right: 35px; /* Để tạo không gian cho icon bên phải */
@@ -53,9 +49,6 @@
             color: #000; /* Màu sắc của icon */
             pointer-events: none; /* Để không can thiệp vào sự kiện chuột */
         }
-
-
-
 
         .nav-1 {
             padding: 10px;
@@ -76,14 +69,12 @@
             background-color: #F0592A !important;
             color: white !important; /* Màu chữ */
             border: none;
-            /* Tạo viền trái màu đen với độ dày 3px */
             border-radius: 0 20px 20px 0 !important; /* Xóa bo tròn ở bên trái */
         }
 
             .footer-order .btn-danger:hover {
-                opacity: 0.9 /* Màu khi hover */
+                opacity: 0.9; /* Màu khi hover */
             }
-
     </style>
 </head>
 
@@ -101,11 +92,6 @@
                     <input type="text" class="form-control" placeholder="Search..." />
                     <i class="fas fa-search position-absolute search-icon"></i>
                 </div>
-
-
-
-
-
 
                 <div class="nav-menu">
                     <ul class="nav-list-items d-flex list-unstyled m-0">
@@ -161,7 +147,6 @@
                     </div>
                 </nav>
             </div>
-
         </div>
     </div>
     <div>
@@ -170,7 +155,7 @@
         </main>
     </div>
 
-    <div class="footer d-flex flex-wrap justify-content-around p-4">
+    <div class="footer d-flex flex-wrap justify-content-around p-4 bg-light">
         <ul class="footer-order list-unstyled d-flex flex-column">
             <li class="footer-item mb-2">
                 <a class="footer-link" asp-area="" asp-controller="Home" asp-action="">Company</a>
@@ -243,7 +228,7 @@
             </li>
             <li class="footer-item mb-3 d-flex">
                 <input type="email" class="form-control" placeholder="Enter Email" />
-                <button class="btn btn-danger text-white">Sign Up</button>
+                <button class="btn btn-danger text-white ms-2">Sign Up</button>
             </li>
         </ul>
     </div>
@@ -251,6 +236,5 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

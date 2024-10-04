@@ -1,7 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Movie Manager Page";
+    ViewData["Title"] = "Rank Page";
 }
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
     * {
         padding: 0px;
@@ -38,6 +37,7 @@
     .menu {
         background-color: #F8F9FC;
         color: black;
+        cursor: pointer;
     }
 
     .menu-item:hover {
@@ -53,7 +53,6 @@
         width: 100%;
     }
 
-    /* Màu nền so le cho bảng */
     .bg-red {
         background-color: #F8F9FC;
         color: black;
@@ -65,12 +64,12 @@
     }
 
     th {
-        background-color: #F8F9FC; /* Màu nền cho header */
-        color: black; /* Màu chữ cho header */
+        background-color: #F8F9FC;
+        color: black; 
     }
 
     .action-menu {
-        display: none; /* Ban đầu ẩn menu */
+        display: none; 
         position: absolute;
         background-color: white;
         width: 150px;
@@ -98,19 +97,20 @@
     }
 
     .order-user ul li{
-        width:150px;    
+        width:150px;
+        cursor: pointer;
     }
     .filmRecommand ul {
-        display: flex; /* Sử dụng flexbox */
-        flex-wrap: wrap; /* Để cho phép các phần tử xuống dòng khi không đủ không gian */
-        justify-content: center; /* Căn giữa các phần tử */
-        padding: 0; /* Loại bỏ padding mặc định của ul */
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center;
+        padding: 0; 
     }
 
     .filmRecommand li {
-        flex: 1 1 200px; /* Chiều rộng tối thiểu 200px, có thể co lại hoặc mở rộng */
-        margin: 10px; /* Khoảng cách giữa các phần tử */
-        max-width: 250px; /* Đặt chiều rộng tối đa cho từng phần tử */
+        flex: 1 1 200px; 
+        margin: 10px; 
+        max-width: 250px; 
     }
 
         .filmRecommand li h7 {
@@ -118,8 +118,8 @@
         }
 
     .filmRecommand img {
-        max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của li */
-        height: auto; /* Giữ tỷ lệ khung hình của hình ảnh */
+        max-width: 100%; 
+        height: auto; 
     }
 
 </style>
@@ -157,7 +157,6 @@
                             </div>
                         </div>
                         <div class="col-6 d-flex justify-content-end align-items-start">
-                            <!-- Thêm align-items-start để căn trên cùng -->
                             <div class="order-user">
                                 <ul class="list-unstyled">
                                     <li class="custom-border bg-dark rounded-3 text-white mb-2 p-2">Đổi mật khẩu</li>
@@ -201,5 +200,4 @@
     </div>
 </div>
 
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
