@@ -6,15 +6,46 @@
         padding: 0px;
         margin: 0px;
         text-decoration: none;
-        list-style:none;
+        list-style: none;
     }
- 
+
+    /* Style cho popup */
+    .popup {
+        display: none; /* Ẩn popup ban đầu */
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        z-index: 1000;
+        border-radius: 10px;
+        width: 450px; /* Chiều rộng của popup */
+        height:600px;
+        justify-content:center;
+        align-items:center;
+    }
+
+    /* Style cho lớp phủ */
+    .overlay {
+        display: none; /* Ẩn lớp phủ ban đầu */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu nền lớp phủ */
+        z-index: 999; /* Nằm dưới popup */
+    }
+
     .input-group {
         position: relative;
     }
 
         .input-group input {
-            padding-right: 30px; /* Để tạo không gian cho icon */
+            padding-right: 30px; /*  Để tạo không gian cho icon */
             border-radius: 20px; /* Thay đổi giá trị theo ý muốn */
         }
 
@@ -28,7 +59,7 @@
 
     .box {
         border: 1px solid #000; /* Viền ngoài chung */
-        height:400px;
+        height: 400px;
         border-radius: 10px;
         padding: 10px;
         background-color: #F7F2FA;
@@ -65,11 +96,11 @@
 
     th {
         background-color: #F8F9FC;
-        color: black; 
+        color: black;
     }
 
     .action-menu {
-        display: none; 
+        display: none;
         position: absolute;
         background-color: white;
         width: 150px;
@@ -93,24 +124,25 @@
     .custom-border {
         border: 1px solid black;
         border-radius: 0.5rem;
-        text-align:center;
+        text-align: center;
     }
 
-    .order-user ul li{
-        width:150px;
+    .order-user ul li {
+        width: 150px;
         cursor: pointer;
     }
+
     .filmRecommand ul {
-        display: flex; 
-        flex-wrap: wrap; 
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        padding: 0; 
+        padding: 0;
     }
 
     .filmRecommand li {
-        flex: 1 1 200px; 
-        margin: 10px; 
-        max-width: 250px; 
+        flex: 1 1 200px;
+        margin: 10px;
+        max-width: 250px;
     }
 
         .filmRecommand li h7 {
@@ -118,10 +150,18 @@
         }
 
     .filmRecommand img {
-        max-width: 100%; 
-        height: auto; 
+        max-width: 100%;
+        height: auto;
     }
 
+    .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #888; /* Màu sắc cho dấu "x" */
+    }
 </style>
 
 <div class="container w-75 mt-5">
@@ -131,7 +171,7 @@
                 <div class="menu-item p-2 hover-bg">
                     Thông tin cá nhân
                 </div>
-                <div class="menu-item p-2 hover-bg">
+                <div class="menu-item p-2 hover-bg" onclick="changePassword()">
                     Đổi mật khẩu
                 </div>
             </div>
@@ -159,23 +199,16 @@
                         <div class="col-6 d-flex justify-content-end align-items-start">
                             <div class="order-user">
                                 <ul class="list-unstyled">
-                                    <li class="custom-border bg-dark rounded-3 text-white mb-2 p-2">Đổi mật khẩu</li>
+                                    <li class="custom-border bg-dark rounded-3 text-white mb-2 p-2 " onclick="changePassword()">Đổi mật khẩu</li>
                                     <li class="custom-border bg-primary rounded-3 text-white mb-2 p-2">Nạp vip</li>
                                 </ul>
                             </div>
                         </div>
-
-
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
     <div class="filmRecommand align-content-center">
         <h2 class="text-center">Có thể bạn sẽ thích</h2>
@@ -198,6 +231,57 @@
             </li>
         </ul>
     </div>
+
+    <!-- Popup cho Đổi mật khẩu -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <span class="close-popup" onclick="closePopup()">&times;</span> <!-- Dấu "x" để đóng popup -->
+        <label for="oldPassword">Mật khẩu cũ hiện tại</label>
+        <input type="password" id="oldPassword" placeholder="value" class="form-control mb-2" />
+        <label for="newPassword">Mật khẩu mới</label>
+        <input type="password" id="newPassword" placeholder="value" class="form-control mb-2" />
+        <label for="confirmPassword">Nhập lại mật khâu</label>
+        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" class="form-control mb-2" />
+        <button class="btn btn-dark w-100" onclick="submitPassword()">Sửa</button>
+    </div>
 </div>
 
+<script>
+    function changePassword() {
+        document.getElementById('popup').style.display = 'block'; // Hiện popup
+        document.getElementById('overlay').style.display = 'block'; // Hiện lớp phủ
+    }
 
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none'; // Ẩn popup
+        document.getElementById('overlay').style.display = 'none'; // Ẩn lớp phủ
+    }
+
+    function submitPassword() {
+        var oldPassword = document.getElementById('oldPassword').value;
+        var newPassword = document.getElementById('newPassword').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Kiểm tra mật khẩu cũ
+        if (oldPassword === '') {
+            alert('Vui lòng nhập mật khẩu cũ.');
+            return;
+        }
+
+        // Kiểm tra mật khẩu mới
+        if (newPassword.length < 6) {
+            alert('Mật khẩu mới phải có ít nhất 6 ký tự.');
+            return;
+        }
+
+        // Kiểm tra xác nhận mật khẩu
+        if (newPassword !== confirmPassword) {
+            alert('Mật khẩu xác nhận không khớp.');
+            return;
+        }
+
+        // Nếu tất cả kiểm tra thành công
+        alert('Đổi mật khẩu thành công!');
+        closePopup(); // Đóng popup
+    }
+</script>
