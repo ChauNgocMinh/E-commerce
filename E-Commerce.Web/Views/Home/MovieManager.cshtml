@@ -2,7 +2,6 @@
     ViewData["Title"] = "Movie Manager Page";
 }
 
-
 <style>
     * {
         padding: 0;
@@ -16,35 +15,38 @@
         align-items: center;
     }
 
-        /* Bo tròn 4 góc của input và thêm khoảng cách với nút "Thêm" */
-        .input-group input {
+      
+        .input-group input:not(.modal-input) {
             width: 100%;
-            padding-right: 40px; /* Khoảng cách cho icon */
-            border-radius: 25px; /* Bo tròn 4 góc */
+            padding-right: 40px; 
             padding-left: 15px;
             border: 1px solid #ccc;
+            border-radius: 25px; 
         }
 
-    /* Icon tìm kiếm nằm bên phải bên trong input */
+    /
     .input-icon {
         position: absolute;
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
         color: #888;
-        pointer-events: none; /* Cho phép nhấn vào input mà không bị ảnh hưởng bởi icon */
+        pointer-events: none; 
     }
 
-    /* Tăng khoảng cách giữa ô tìm kiếm và nút Thêm */
-    .add-film .search {
-        margin-right: 20px; /* Khoảng cách giữa ô tìm kiếm và nút "Thêm" */
-    }
-
-    /* Nút thêm */
+    
     .btn-primary {
-        border-radius: 25px; /* Bo tròn nút "Thêm" để đồng nhất với ô tìm kiếm */
+        border-radius: 25px; 
     }
 
+   
+    .modal-input {
+        border-radius: 0px; 
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+    }
+
+    
     .close-icon {
         position: absolute;
         top: 10px;
@@ -68,7 +70,7 @@
     .menu-item:hover {
         background-color: #E8DEF8;
         border-radius: 50px;
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .bg-red {
@@ -105,6 +107,7 @@
                 color: black;
                 transition: color 0.3s;
             }
+
 </style>
 
 <div class="container w-75 mt-5">
@@ -184,31 +187,29 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-
             </div>
 
             <div class="modal-body">
                 <form>
                     <div class="form-group">
                         <label for="filmTitle">Tiêu đề</label>
-                        <input type="text" class="form-control" id="filmTitle" placeholder="Value">
+                        <input type="text" class="form-control modal-input" id="filmTitle" placeholder="Value">
                     </div>
                     <div class="form-group">
                         <label for="filmGenre">Full video</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="filmGenre" placeholder="Video_Name" readonly>
+                            <input type="text" class="form-control modal-input" id="filmGenre" placeholder="Video_Name" readonly>
                             <div class="input-group-append">
                                 <input type="file" id="fileInput" style="display: none;" accept="video/*" />
                                 <span class="input-group-text" id="uploadIcon" style="cursor: pointer;">
                                     <i class="fa-solid fa-paperclip"></i>
                                 </span>
                             </div>
-                           
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="filmNote">Ghi chú</label>
-                        <input type="text" class="form-control" id="filmNote" placeholder="Value">
+                        <input type="text" class="form-control modal-input" id="filmNote" placeholder="Value">
                     </div>
                 </form>
             </div>
@@ -218,7 +219,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     // Tắt hiển thị menu khi nhấp vào icon
@@ -249,3 +249,8 @@
         document.getElementById('filmGenre').value = '';
     };
 </script>
+
+<!-- Bootstrap CSS and JS (jQuery, Popper.js, Bootstrap JS) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
