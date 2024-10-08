@@ -8,16 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Cqrs\Commands\" />
-    <Folder Include="Cqrs\Handler\" />
-    <Folder Include="Cqrs\Queries\" />
+    <Compile Remove="Cqrs\**" />
+    <EmbeddedResource Remove="Cqrs\**" />
+    <None Remove="Cqrs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="AutoMapping\" />
-    <Folder Include="Response\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="OneOf" Version="3.0.271" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\E-Commerce.Domain\E-Commerce.Domain.csproj" />
   </ItemGroup>
 
 </Project>

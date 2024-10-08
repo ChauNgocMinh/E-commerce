@@ -8,9 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\AdminSite\" />
+    <Compile Remove="Views\NewFolder\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <None Remove="Views\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\UserSite\" />
-    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>
