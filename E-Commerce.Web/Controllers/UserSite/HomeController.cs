@@ -3,7 +3,7 @@ using E_Commerce.Domain.Entities.Products;
 using E_Commerce.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.Application.Response.ProductResponse;
-namespace E_Commerce.Controllers;
+namespace E_Commerce.Controllers.UserSite;
 
 public class HomeController : Controller
 {
