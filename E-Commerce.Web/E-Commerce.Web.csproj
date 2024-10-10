@@ -27,4 +27,8 @@
     <ProjectReference Include="..\E-Commerce.Infastructure\E-Commerce.Infastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>

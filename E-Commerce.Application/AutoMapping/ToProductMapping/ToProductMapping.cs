@@ -8,6 +8,7 @@ namespace E_Commerce.Application.AutoMapping.ToProductMapping
         public ToProductMapping() 
         {
             CreateMap<Product, ProductResponse>();
+            CreateMap<ProductImage, ProductImageResponse>();
         }
     }
 }

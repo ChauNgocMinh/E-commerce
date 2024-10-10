@@ -18,6 +18,7 @@ namespace E_Commerce.Infastructure.DbContexts
 		public DbSet<ProductFeedBack> ProductFeedBacks { get; set; }
 		public DbSet<NumberLikeProduct> NumberLikeProducts { get; set; } 
 		public DbSet<LikeFeedBack> LikeFeedBacks { get; set; } 
+		public DbSet<ProductTag> ProductTags { get; set; } 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
@@ -42,6 +43,10 @@ namespace E_Commerce.Infastructure.DbContexts
 					  .HasMaxLength(1000); 
 
 				entity.HasMany(p => p.ProductImages)
+					  .WithOne(pi => pi.Product)
+					  .HasForeignKey(pi => pi.ProductId);
+
+				entity.HasMany(p => p.ProductTags)
 					  .WithOne(pi => pi.Product)
 					  .HasForeignKey(pi => pi.ProductId);
 
@@ -108,6 +113,14 @@ namespace E_Commerce.Infastructure.DbContexts
 				entity.HasOne(i => i.User)
 					  .WithMany() 
 					  .HasForeignKey(i => i.UserId);
+			});
+
+			modelBuilder.Entity<ProductTag>(entity =>
+			{
+				entity.HasKey(i => i.Id); 
+
+				entity.Property(i => i.Name)
+					  .HasMaxLength(30); 
 			});
 		}
 	}
