@@ -1,4 +1,6 @@
-﻿@{
+﻿@using E_Commerce.Application.Response.ProductResponse;
+@model List<ProductResponse>
+@{
     ViewData["Title"] = "Home Page";
 }
 <style>
@@ -152,202 +154,21 @@
                 </div>
             </div>
             <div class="row movie-cart ">
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Date</span>
+                @foreach(var item in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
+                            <div class="card-body">
+                                <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
+                                <div class="keyword">
+                                    <span class="keyword-item selected">Fee</span>
+                                    <span class="keyword-item">Date</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 2">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Trung Quốc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 3">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 4">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 2">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Trung Quốc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 3">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 4">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 2">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Trung Quốc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 3">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 4">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 1">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 2">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                                <span class="keyword-item">Trung Quốc</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 3">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item">Date</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie 4">
-                        <div class="card-body">
-                            <h5 class="title-movie"><a asp-area="" asp-controller="Home" asp-action="ProductDetail">movie 1</a></h5>
-                            <div class="keyword">
-                                <span class="keyword-item selected">Fee</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

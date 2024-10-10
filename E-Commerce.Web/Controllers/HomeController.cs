@@ -1,20 +1,28 @@
-﻿using System.Diagnostics;
+﻿using AutoMapper;
+using E_Commerce.Domain.Entities.Products;
+using E_Commerce.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
+using E_Commerce.Application.Response.ProductResponse;
 namespace E_Commerce.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IMapper _mapper;
+    private readonly IGenericRepository<Product> _productRepository;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Product> productRepository)
     {
         _logger = logger;
+        _mapper = mapper;
+        _productRepository = productRepository;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var products = await _productRepository.GetAllAsync();
+        var productResponses = _mapper.Map<List<ProductResponse>>(products);
+        return View(productResponses);
     }
 
     public IActionResult GetProductByCategory()

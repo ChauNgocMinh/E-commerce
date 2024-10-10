@@ -16,7 +16,8 @@ namespace E_Commerce.Controllers.AdminSite
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _productRepository.GetAllAsync();
+            var products = await _productRepository.GetAllAsync(); 
+            map
             return View(products);
         }
     }
