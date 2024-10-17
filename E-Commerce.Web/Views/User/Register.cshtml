@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Register Page";
+}
+
+<style>
+    .register-card {
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card register-card">
+                <div class="card-body">
+                    <h3 class="text-center">Đăng ký tài khoản</h3>
+
+                    <form asp-action="Register" asp-controller="User" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="displayName" class="form-label">Tên hiển thị</label>
+                            <input type="text" class="form-control" name="displayName" id="displayName" placeholder="Nhập tên hiển thị" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Nhập số điện thoại">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="dateOfBirth" class="form-label">Ngày sinh</label>
+                            <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark">Đăng ký</button>
+                        </div>
+                    </form>
+
+                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @ViewData["ErrorMessage"]
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
