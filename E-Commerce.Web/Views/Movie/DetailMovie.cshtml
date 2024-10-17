@@ -3,25 +3,22 @@
 
 @{
     ViewData["Title"] = "Product Detail Page";
+     var reviews = new List<dynamic>
+     {
+         new { Title = "Review Title 1", Body = "Review Body 1", Name = "Review Name 1", Stars = 5, Image = "/userreview.png" },
+         new { Title = "Review Title 2", Body = "Review Body 2", Name = "Review Name 2", Stars = 4, Image = "/userreview.png" },
+         new { Title = "Review Title 3", Body = "Review Body 3", Name = "Review Name 3", Stars = 5, Image = "/userreview.png" }
+     };
 
-    // Danh sách các đánh giá
-    var reviews = new List<dynamic>
-    {
-        new { Title = "Review Title 1", Body = "Review Body 1", Name = "Review Name 1", Stars = 5, Image = "/userreview.png" },
-        new { Title = "Review Title 2", Body = "Review Body 2", Name = "Review Name 2", Stars = 4, Image = "/userreview.png" },
-        new { Title = "Review Title 3", Body = "Review Body 3", Name = "Review Name 3", Stars = 5, Image = "/userreview.png" }
-    };
+     var films = new List<dynamic>
+     {
+         new { Title = "Liên hoa lâu", Image = "/lienhoalau.png" },
+         new { Title = "Đường triều Qủy Sự Lục", Image = "/duongtrieuquysuluc.png" },
+         new { Title = "Nạn nhân không hoàn hảo", Image = "/nannhankhonghoanhao.jpg" },
+         new { Title = "Thợ săn tí hon", Image = "/thosantihon.png" }
+     };
 
-    // Danh sách các phim gợi ý
-    var films = new List<dynamic>
-    {
-        new { Title = "Liên hoa lâu", Image = "/lienhoalau.png" },
-        new { Title = "Đường triều Qủy Sự Lục", Image = "/duongtrieuquysuluc.png" },
-        new { Title = "Nạn nhân không hoàn hảo", Image = "/nannhankhonghoanhao.jpg" },
-        new { Title = "Thợ săn tí hon", Image = "/thosantihon.png" }
-    };
-
-}
+ }
 <style>
     * {
         margin: 0;
@@ -95,11 +92,11 @@
 <div class="container mt-5">
     <div class="description row justify-content-center">
         <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
-            <img src="~/duongtrieuquysuluc.png" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
+            <img src="@Model.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
         </div>
 
         <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
-            <h3>Đường triều Qủy Sư Lục</h3>
+            <h3>@Model.Name</h3>
             <div class=" ">Tag</div>
             <ul class="list-unstyled d-flex">
                 <li class="me-2 p-2 rounded-3">Cổ trang</li>
@@ -109,7 +106,7 @@
             <button>Xem ngay</button>
             <div class="custom-border p-3 mt-3">
                 <h4>Giới thiệu</h4>
-                Đường Triều Quỷ Sự Lục 2: Tây Hành là một bộ phim trinh thám cổ trang do Bá Sam ("Đường Triều Quỷ Sự Lục - Ký Sự Chuyện Kỳ Dị Đường Triều") làm đạo diễn chính, với sự tham gia của Dương Húc Văn ("Đường Triều Quỷ Sự Lục") và Dương Chí Cương ("Đường Triều Quỷ Sự Lục") đảm nhận vai chính. Bộ phim được chuyển thể từ tiểu thuyết cùng tên của tác giả Nguy Phong Hoa, là phần thứ hai trong loạt truyện "Đường Triều Quỷ Sự Lục". 
+                @Model.Description
             </div>
         </div>
     </div>

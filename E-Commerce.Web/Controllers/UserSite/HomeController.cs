@@ -3,6 +3,7 @@ using E_Commerce.Domain.Entities.Products;
 using E_Commerce.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.Application.Response.ProductResponse;
+using Microsoft.EntityFrameworkCore;
 namespace E_Commerce.Controllers.UserSite;
 
 public class HomeController : Controller
@@ -20,7 +21,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var products = await _productRepository.GetAllAsync();
+        var products = await _productRepository.GetAllAsync(x => true, include: query => query.Include(o => o.ProductImages));
         var productResponses = _mapper.Map<List<ProductResponse>>(products);
         return View(productResponses);
     }
