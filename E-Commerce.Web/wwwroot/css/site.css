@@ -1,26 +1,4 @@
-﻿/*html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}*/
-* {
+﻿* {
     margin: 0px;
     padding: 0px;
 }
@@ -34,7 +12,7 @@ body {
 .header {
     width: 100%;
     height: auto;
-    background-color: #f8f9fa; /* Màu nền tổng thể cho header */
+    background-color: #f8f9fa;
 }
 
 a {
@@ -44,13 +22,12 @@ a {
 
 .nav-1 {
     width: 100%;
-    height: 70px;
-    background-color: #ffffff; /* Màu nền cho nav-1 */
+    background-color: #ffffff;
 }
 
 .nav-2 {
     width: 100%;
-    background-color: #615C99; /* Màu nền cho nav-2 */
+    background-color: #615C99;
 }
 
 .nav-logo img {
@@ -63,18 +40,17 @@ a {
 }
 
 .nav-search input {
-    width: 400px;
     height: 35px;
     border: 1px solid #ccc;
     border-radius: 50px;
-    padding-left: 40px; /* Tạo khoảng trống cho icon */
+    padding-left: 40px;
     font-size: 16px;
 }
 
 .nav-search i {
     position: absolute;
     top: 50%;
-    left: 15px; /* Điều chỉnh vị trí của icon */
+    left: 15px;
     transform: translateY(-50%);
     font-size: 16px;
     color: #ccc;
@@ -88,11 +64,6 @@ a {
     color: #ffff;
 }
 
-/* Hiệu ứng khi di chuột qua liên kết */
-.nav-1 a.nav-link:hover {
-    text-decoration: underline;
-}
-
 .nav-2 a.nav-link:hover {
     background-color: #007bff;
     color: #ffffff;
@@ -100,7 +71,7 @@ a {
 
 
 .container {
-    min-width: 100%; /* Đảm bảo container chiếm toàn bộ chiều ngang */
+    min-width: 100%;
 }
 
 

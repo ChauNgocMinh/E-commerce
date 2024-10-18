@@ -18,12 +18,19 @@ namespace E_Commerce.Infastructure.DbContexts
 		public DbSet<ProductFeedBack> ProductFeedBacks { get; set; }
 		public DbSet<NumberLikeProduct> NumberLikeProducts { get; set; } 
 		public DbSet<LikeFeedBack> LikeFeedBacks { get; set; } 
-		public DbSet<ProductTag> ProductTags { get; set; } 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.ToTable("Roles"); 
+            });
+
+            modelBuilder.Entity<Product>(entity =>
 			{
 				entity.HasKey(p => p.Id); 
 

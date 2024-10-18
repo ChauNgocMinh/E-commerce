@@ -1,7 +1,14 @@
 ﻿using E_Commerce.Domain.Entities.Users;
+using E_Commerce.Domain.ViewModel;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace E_Commerce.Controllers.UserSite
 {
@@ -23,22 +30,40 @@ namespace E_Commerce.Controllers.UserSite
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
-
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var token = GenerateJwtToken(model.Email);
+                    return Ok(new { token });
                 }
-
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
 
-            return View();
+            return BadRequest(ModelState);
         }
+
+        private string GenerateJwtToken(string email)
+        {
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourSuperSecretKey12345"));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: "YourIssuer",
+                audience: null,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: creds);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -46,7 +71,7 @@ namespace E_Commerce.Controllers.UserSite
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string email, string password, string confirmPassword)
+        public async Task<IActionResult> Register(string email, string displayName, string phoneNumber, DateTime dateOfBirth, string password, string confirmPassword, string avata = null)
         {
             if (password != confirmPassword)
             {
@@ -56,7 +81,16 @@ namespace E_Commerce.Controllers.UserSite
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = email, Email = email };
+                var user = new User
+                {
+                    UserName = email,
+                    Email = email,
+                    DisplayName = displayName,
+                    PhoneNumber = phoneNumber,
+                    DateOfBirth = dateOfBirth,
+                    Avata = avata ?? "default-avatar.png" 
+                };
+
                 var result = await _userManager.CreateAsync(user, password);
 
                 if (result.Succeeded)
@@ -70,7 +104,6 @@ namespace E_Commerce.Controllers.UserSite
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
             return View();
         }
 
@@ -78,7 +111,7 @@ namespace E_Commerce.Controllers.UserSite
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

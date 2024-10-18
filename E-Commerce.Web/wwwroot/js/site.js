@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿async function login(email, password) {
+    const response = await fetch('/User/Login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
 
-// Write your JavaScript code.
+    if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token); // Lưu token vào local storage
+        window.location.href = '/Home/Index'; // Chuyển hướng đến trang index
+    } else {
+        const errorData = await response.json();
+        console.error('Login failed:', errorData);
+    }
+}

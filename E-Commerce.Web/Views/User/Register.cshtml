@@ -4,7 +4,6 @@
 
 <style>
     .register-card {
-        padding: 30px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -16,12 +15,13 @@
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card register-card">
                 <div class="card-body">
                     <h3 class="text-center">Đăng ký tài khoản</h3>
 
                     <form asp-action="Register" asp-controller="User" method="post">
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" required>

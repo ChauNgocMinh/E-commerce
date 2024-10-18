@@ -4,7 +4,6 @@
 
 <style>
     .login-card {
-        padding: 30px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -21,20 +20,20 @@
 
 <div class="container mt-5 mb-5 login">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card login-card">
                 <div class="card-body">
                     <h3 class="text-center">Đăng nhập</h3>
 
-                    <form asp-action="Login" asp-controller="User" method="post">
+                    <form id="loginForm">
                         <div class="mb-3">
                             <label for="email" class="form-label">Tài khoản</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" required>
+                            <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" required>
+                            <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
                         </div>
 
                         <div class="d-grid">
@@ -46,12 +45,8 @@
                         </div>
                     </form>
 
-                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
-                    {
-                        <div class="alert alert-danger mt-3">
-                            @ViewData["ErrorMessage"]
-                        </div>
-                    }
+                    <div id="error-message" class="alert alert-danger mt-3" style="display: none;"></div>
+
                     <div class="text-center mt-3">
                         <a asp-action="Register" asp-controller="User" class="btn btn-link register-link">Chưa có tài khoản? Đăng ký tại đây</a>
                     </div>
@@ -60,3 +55,36 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); 
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/User/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result.token); 
+                window.location.href = '/';
+            } else {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.innerHTML = 'Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.';
+                errorMessage.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Có lỗi xảy ra:', error);
+        }
+    });
+</script>
