@@ -59,6 +59,10 @@ a {
 .nav-1 a.nav-link {
     color: #000000;
 }
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .nav-2 a.nav-link {
     color: #ffff;
