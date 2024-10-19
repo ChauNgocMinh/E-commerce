@@ -30,9 +30,12 @@ namespace ECommerce.Infastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Avata = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -42,6 +45,7 @@ namespace ECommerce.Infastructure.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -54,14 +58,14 @@ namespace ECommerce.Infastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Movies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UrlMedia = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    IsFree = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -69,7 +73,7 @@ namespace ECommerce.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,6 +92,23 @@ namespace ECommerce.Infastructure.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Roles_AspNetRoles_Id",
+                        column: x => x.Id,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -179,39 +200,14 @@ namespace ECommerce.Infastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NumberLikeProducts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NumberLikeProducts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NumberLikeProducts_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_NumberLikeProducts_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductFeedBacks",
+                name: "MovieFeedBacks",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -219,32 +215,58 @@ namespace ECommerce.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductFeedBacks", x => x.Id);
+                    table.PrimaryKey("PK_MovieFeedBacks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFeedBacks_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_MovieFeedBacks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieFeedBacks_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductImages",
+                name: "MovieImages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UrlImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsMain = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductImages", x => x.Id);
+                    table.PrimaryKey("PK_MovieImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductImages_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_MovieImages_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieTags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    MovieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovieTags_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -289,24 +311,24 @@ namespace ECommerce.Infastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NumberLikeProducts_ProductId",
-                table: "NumberLikeProducts",
-                column: "ProductId");
+                name: "IX_MovieFeedBacks_MovieId",
+                table: "MovieFeedBacks",
+                column: "MovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NumberLikeProducts_UserId",
-                table: "NumberLikeProducts",
+                name: "IX_MovieFeedBacks_UserId",
+                table: "MovieFeedBacks",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductFeedBacks_ProductId",
-                table: "ProductFeedBacks",
-                column: "ProductId");
+                name: "IX_MovieImages_MovieId",
+                table: "MovieImages",
+                column: "MovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductId",
-                table: "ProductImages",
-                column: "ProductId");
+                name: "IX_MovieTags_MovieId",
+                table: "MovieTags",
+                column: "MovieId");
         }
 
         /// <inheritdoc />
@@ -328,22 +350,25 @@ namespace ECommerce.Infastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "NumberLikeProducts");
+                name: "MovieFeedBacks");
 
             migrationBuilder.DropTable(
-                name: "ProductFeedBacks");
+                name: "MovieImages");
 
             migrationBuilder.DropTable(
-                name: "ProductImages");
+                name: "MovieTags");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Movies");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
         }
     }
 }

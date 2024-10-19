@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Entities.Products;
+﻿using E_Commerce.Domain.Entities.Movies;
 using E_Commerce.Domain.Entities.Users;
 using E_Commerce.Domain.Entities.Roles;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,12 +13,10 @@ namespace E_Commerce.Infastructure.DbContexts
 		: base(options)
 		{
 		}
-		public DbSet<Product> Products { get; set; }
-		public DbSet<ProductImage> ProductImages { get; set; }
-		public DbSet<ProductFeedBack> ProductFeedBacks { get; set; }
-		public DbSet<NumberLikeProduct> NumberLikeProducts { get; set; } 
-		public DbSet<LikeFeedBack> LikeFeedBacks { get; set; } 
-		public DbSet<ProductTag> ProductTags { get; set; }
+		public DbSet<Movie> Movies { get; set; }
+		public DbSet<MovieImage> MovieImages { get; set; }
+		public DbSet<MovieFeedBack> MovieFeedBacks { get; set; }
+		public DbSet<MovieTag> MovieTags { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,39 +28,31 @@ namespace E_Commerce.Infastructure.DbContexts
                 entity.ToTable("Roles"); 
             });
 
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<Movie>(entity =>
 			{
 				entity.HasKey(p => p.Id); 
 
 				entity.Property(p => p.Name)
 					  .IsRequired()
 					  .HasMaxLength(200); 
-
-				entity.Property(p => p.Price)
-					  .IsRequired()
-					  .HasColumnType("decimal(18,2)"); 
-
-				entity.Property(p => p.BasePrice)
-					  .IsRequired()
-					  .HasColumnType("decimal(18,2)");
 				
 				entity.Property(p => p.Description)
 					  .HasMaxLength(1000); 
 
-				entity.HasMany(p => p.ProductImages)
-					  .WithOne(pi => pi.Product)
-					  .HasForeignKey(pi => pi.ProductId);
+				entity.HasMany(p => p.MovieImages)
+					  .WithOne(pi => pi.Movie)
+					  .HasForeignKey(pi => pi.MovieId);
 
-				entity.HasMany(p => p.ProductTags)
-					  .WithOne(pi => pi.Product)
-					  .HasForeignKey(pi => pi.ProductId);
+				entity.HasMany(p => p.MovieTags)
+					  .WithOne(pi => pi.Movie)
+					  .HasForeignKey(pi => pi.MovieId);
 
-				entity.HasMany(p => p.ProductFeedBacks)
-					  .WithOne(pf => pf.Product)
-					  .HasForeignKey(pf => pf.ProductId);
+				entity.HasMany(p => p.MovieFeedBacks)
+					  .WithOne(pf => pf.Movie)
+					  .HasForeignKey(pf => pf.MovieId);
 			});
 
-			modelBuilder.Entity<ProductImage>(entity =>
+			modelBuilder.Entity<MovieImage>(entity =>
 			{
 				entity.HasKey(pi => pi.Id); 
 
@@ -73,56 +63,17 @@ namespace E_Commerce.Infastructure.DbContexts
 					  .HasDefaultValue(false); 
 			});
 
-			modelBuilder.Entity<ProductFeedBack>(entity =>
+			modelBuilder.Entity<MovieFeedBack>(entity =>
 			{
 				entity.HasKey(pf => pf.Id);
 
-				entity.Property(pf => pf.Description)
-					  .IsRequired();
+				entity.Property(pf => pf.Comment);
 
 				entity.Property(pf => pf.Rate)
 					  .IsRequired();
 			});
 
-			modelBuilder.Entity<NumberLikeProduct>(entity =>
-			{
-				entity.HasKey(i => i.Id); 
-
-				entity.Property(i => i.ProductId)
-					  .IsRequired(); 
-
-				entity.Property(i => i.UserId)
-					  .IsRequired(); 
-
-				entity.HasOne(i => i.Product)
-					  .WithMany() 
-					  .HasForeignKey(i => i.ProductId); 
-
-				entity.HasOne(i => i.User)
-					  .WithMany() 
-					  .HasForeignKey(i => i.UserId);
-			});
-
-			modelBuilder.Entity<LikeFeedBack>(entity =>
-			{
-				entity.HasKey(i => i.Id); 
-
-				entity.Property(i => i.ProductFeedBackId)
-					  .IsRequired(); 
-
-				entity.Property(i => i.UserId)
-					  .IsRequired(); 
-
-				entity.HasOne(i => i.ProductFeedBack)
-					  .WithMany() 
-					  .HasForeignKey(i => i.ProductFeedBackId); 
-
-				entity.HasOne(i => i.User)
-					  .WithMany() 
-					  .HasForeignKey(i => i.UserId);
-			});
-
-			modelBuilder.Entity<ProductTag>(entity =>
+			modelBuilder.Entity<MovieTag>(entity =>
 			{
 				entity.HasKey(i => i.Id); 
 

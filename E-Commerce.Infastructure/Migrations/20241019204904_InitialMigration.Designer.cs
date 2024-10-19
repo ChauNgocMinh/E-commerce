@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240915171659_InitialMigration")]
+    [Migration("20241019204904_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -25,38 +25,11 @@ namespace ECommerce.Infastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.NumberLikeProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("NumberLikeProducts");
-                });
-
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.Movie", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("BasePrice")
-                        .IsRequired()
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -68,13 +41,13 @@ namespace ECommerce.Infastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -82,16 +55,23 @@ namespace ECommerce.Infastructure.Migrations
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("UrlMedia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductFeedBack", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieFeedBack", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -99,11 +79,7 @@ namespace ECommerce.Infastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("MovieId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Rate")
@@ -115,14 +91,19 @@ namespace ECommerce.Infastructure.Migrations
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("MovieId");
 
-                    b.ToTable("ProductFeedBacks");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MovieFeedBacks");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductImage", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +116,7 @@ namespace ECommerce.Infastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("MovieId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UrlImage")
@@ -144,9 +125,32 @@ namespace ECommerce.Infastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("MovieId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("MovieImages");
+                });
+
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("MovieTags");
                 });
 
             modelBuilder.Entity("E_Commerce.Domain.Entities.Users.User", b =>
@@ -165,6 +169,12 @@ namespace ECommerce.Infastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -198,7 +208,6 @@ namespace ECommerce.Infastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
@@ -209,6 +218,12 @@ namespace ECommerce.Infastructure.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -253,6 +268,8 @@ namespace ECommerce.Infastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -358,45 +375,52 @@ namespace ECommerce.Infastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.NumberLikeProduct", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Roles.Role", b =>
                 {
-                    b.HasOne("E_Commerce.Domain.Entities.Products.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>");
+
+                    b.ToTable("Roles", (string)null);
+                });
+
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieFeedBack", b =>
+                {
+                    b.HasOne("E_Commerce.Domain.Entities.Movies.Movie", "Movie")
+                        .WithMany("MovieFeedBacks")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("E_Commerce.Domain.Entities.Users.User", "User")
+                    b.HasOne("E_Commerce.Domain.Entities.Users.User", "Users")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Movie");
 
-                    b.Navigation("User");
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductFeedBack", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieImage", b =>
                 {
-                    b.HasOne("E_Commerce.Domain.Entities.Products.Product", "Product")
-                        .WithMany("ProductFeedBacks")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("E_Commerce.Domain.Entities.Movies.Movie", "Movie")
+                        .WithMany("MovieImages")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductImage", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.MovieTag", b =>
                 {
-                    b.HasOne("E_Commerce.Domain.Entities.Products.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("E_Commerce.Domain.Entities.Movies.Movie", "Movie")
+                        .WithMany("MovieTags")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -450,11 +474,22 @@ namespace ECommerce.Infastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Roles.Role", b =>
                 {
-                    b.Navigation("ProductFeedBacks");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("E_Commerce.Domain.Entities.Roles.Role", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Navigation("ProductImages");
+            modelBuilder.Entity("E_Commerce.Domain.Entities.Movies.Movie", b =>
+                {
+                    b.Navigation("MovieFeedBacks");
+
+                    b.Navigation("MovieImages");
+
+                    b.Navigation("MovieTags");
                 });
 #pragma warning restore 612, 618
         }

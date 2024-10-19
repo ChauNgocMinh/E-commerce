@@ -1,40 +1,40 @@
-﻿using E_Commerce.Domain.Entities.Products;
+﻿using E_Commerce.Domain.Entities.Movies;
 using E_Commerce.Domain.Interfaces;
 
-namespace E_Commerce.Infastructure.Services.ProductService
+namespace E_Commerce.Infastructure.Services.Movieervice
 {
-    internal class ProductService
+    internal class Movieervice
     {
-        private readonly IGenericRepository<Product> _productRepository;
+        private readonly IGenericRepository<Movie> _MovieRepository;
 
-        public ProductService(IGenericRepository<Product> productRepository)
+        public Movieervice(IGenericRepository<Movie> MovieRepository)
         {
-            _productRepository = productRepository;
+            _MovieRepository = MovieRepository;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IEnumerable<Movie>> GetAllMovieAsync()
         {
-            return await _productRepository.GetAllAsync();
+            return await _MovieRepository.GetAllAsync();
         }
 
-        public async Task<Product> GetProductByIdAsync(Guid id)
+        public async Task<Movie> GetMovieByIdAsync(Guid id)
         {
-            return await _productRepository.GetByIdAsync(id);
+            return await _MovieRepository.GetByIdAsync(id);
         }
 
-        public async Task AddProductAsync(Product product)
+        public async Task AddMovieAsync(Movie Movie)
         {
-            await _productRepository.AddAsync(product);
+            await _MovieRepository.AddAsync(Movie);
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task UpdateMovieAsync(Movie Movie)
         {
-            await _productRepository.UpdateAsync(product);
+            await _MovieRepository.UpdateAsync(Movie);
         }
 
-        public async Task DeleteProductAsync(Guid id)
+        public async Task DeleteMovieAsync(Guid id)
         {
-            await _productRepository.DeleteAsync(id);
+            await _MovieRepository.DeleteAsync(id);
         }
     }
 }

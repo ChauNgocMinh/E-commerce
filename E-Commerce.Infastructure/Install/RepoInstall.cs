@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Entities.Products;
+﻿using E_Commerce.Domain.Entities.Movies;
 using E_Commerce.Domain.Entities.Roles;
 using E_Commerce.Domain.Entities.Users;
 using E_Commerce.Domain.Interfaces;
@@ -20,7 +20,7 @@ namespace E_Commerce.Infastructure.Install
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            services.AddScoped<IGenericRepository<Movie>, GenericRepository<Movie>>();
         }
     }
 }

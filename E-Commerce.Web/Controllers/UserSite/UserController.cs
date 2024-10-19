@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Commerce.Controllers.UserSite
 {
@@ -112,6 +113,13 @@ namespace E_Commerce.Controllers.UserSite
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> InfoUser()
+        {
+            return View();
         }
     }
 }

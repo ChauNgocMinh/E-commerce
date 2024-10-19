@@ -1,34 +1,36 @@
 ﻿using AutoMapper;
-using E_Commerce.Domain.Entities.Products;
 using E_Commerce.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using E_Commerce.Application.Response.ProductResponse;
+using E_Commerce.Application.Response.MovieResponse;
 using Microsoft.EntityFrameworkCore;
+using E_Commerce.Domain.Entities.Movies;
 namespace E_Commerce.Controllers.UserSite;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IMapper _mapper;
-    private readonly IGenericRepository<Product> _productRepository;
+    private readonly IGenericRepository<Movie> _MovieRepository;
 
-    public HomeController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Product> productRepository)
+    public HomeController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Movie> MovieRepository)
     {
         _logger = logger;
         _mapper = mapper;
-        _productRepository = productRepository;
+        _MovieRepository = MovieRepository;
     }
 
     public async Task<IActionResult> Index()
     {
-        var products = await _productRepository.GetAllAsync(x => true, include: query => query.Include(o => o.ProductImages));
-        var productResponses = _mapper.Map<List<ProductResponse>>(products);
-        return View(productResponses);
+        var Movies = await _MovieRepository.GetAllAsync(x => true, include: query => query.Include(o => o.MovieImages));
+        var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
+        return View(MovieResponses);
     }
 
-    public IActionResult GetProductByCategory()
+    public async Task<IActionResult> GetMovieByCategory(Guid IdCateglory)
     {
-        return View();
+        var Movies = await _MovieRepository.GetAllAsync(x => true, include: query => query.Include(o => o.MovieImages));
+        var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
+        return View(MovieResponses);
     }
     public IActionResult Rank()
     {
@@ -42,7 +44,7 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult ProductDetail()
+    public IActionResult MovieDetail()
     {
         return View();
     }

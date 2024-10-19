@@ -63,18 +63,15 @@
     <div class="header">
         <div class="nav">
             <div class="nav-1 d-flex flex-wrap justify-content-between align-items-center">
-                <!-- Logo Section -->
                 <a class="nav-logo" asp-area="" asp-controller="Home" asp-action="Index" style="flex: 1;">
                     <img src="~/Img/Logo.png" alt="Logo SNAT" style="width: 150px;" />
                 </a>
 
-                <!-- Search Bar Section -->
                 <div class="nav-search d-flex mx-3 position-relative" style="flex: 2;">
                     <input type="text" class="form-control" placeholder="Search..." />
                     <i class="fas fa-search position-absolute search-icon"></i>
                 </div>
 
-                <!-- User Menu Section -->
                 <div class="nav-menu" style="flex: 1;">
                     <ul class="nav-list-items d-flex list-unstyled m-0 justify-content-end">
                         @if (User.Identity.IsAuthenticated)
@@ -85,10 +82,13 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                     <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="InfoUser">Thông tin tài khoản</a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Rank">Hạng</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ProductDetail">Bộ sưu tập</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="MovieDetail">Bộ sưu tập</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -119,16 +119,16 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav d-flex flex-wrap list-unstyled m-0">
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">ĐỀ XUẤT</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">ĐỀ XUẤT</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HÀNH ĐỘNG</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">HÀNH ĐỘNG</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">TÌNH CẢM</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">TÌNH CẢM</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">HOẠT HÌNH</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">HOẠT HÌNH</a>
                                 </li>
                                 <li class="nav-item mx-2">
                                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">THÊM...</a>

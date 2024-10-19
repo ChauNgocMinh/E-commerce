@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Response.ProductResponse;
-using E_Commerce.Domain.Entities.Products;
-namespace E_Commerce.Application.AutoMapping.ToProductMapping
+using E_Commerce.Application.Response.MovieResponse;
+using E_Commerce.Domain.Entities.Movies;
+namespace E_Commerce.Application.AutoMapping.ToMovieMapping
 {
-    public class ToProductMapping : Profile
+    public class ToMovieMapping : Profile
     {
-        public ToProductMapping() 
+        public ToMovieMapping() 
         {
-            CreateMap<Product, ProductResponse>();
-            CreateMap<ProductImage, ProductImageResponse>();
+            CreateMap<Movie, MovieResponse>();
+            CreateMap<MovieImage, MovieImageResponse>();
         }
     }
 }
