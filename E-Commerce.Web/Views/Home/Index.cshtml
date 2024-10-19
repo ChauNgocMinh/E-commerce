@@ -158,8 +158,10 @@
                             <div class="card-body">
                                 <h5 class="title-movie"><a asp-area="" asp-controller="Movie" asp-action="DetailMovie" asp-route-Id="@item.Id">@item.Name</a></h5>
                                 <div class="keyword">
-                                    <span class="keyword-item selected">Fee</span>
-                                    <span class="keyword-item">Date</span>
+                                    @foreach (var tag in item.MovieTags)
+                                    {
+                                        <span class="keyword-item selected">@tag.Name</span>
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -21,14 +21,14 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var Movies = await _MovieRepository.GetAllAsync(x => true, include: query => query.Include(o => o.MovieImages));
+        var Movies = await _MovieRepository.GetAllAsync(x => true, include: query => query.Include(o => o.MovieImages).Include(db => db.MovieTags));
         var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
         return View(MovieResponses);
     }
 
     public async Task<IActionResult> GetMovieByCategory(Guid IdCateglory)
     {
-        var Movies = await _MovieRepository.GetAllAsync(x => true, include: query => query.Include(o => o.MovieImages));
+        var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == IdCateglory, include: query => query.Include(o => o.MovieImages));
         var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
         return View(MovieResponses);
     }

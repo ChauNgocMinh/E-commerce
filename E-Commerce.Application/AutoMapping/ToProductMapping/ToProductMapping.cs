@@ -9,6 +9,7 @@ namespace E_Commerce.Application.AutoMapping.ToMovieMapping
         {
             CreateMap<Movie, MovieResponse>();
             CreateMap<MovieImage, MovieImageResponse>();
+            CreateMap<MovieTag, MovieTagResponse>();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace E_Commerce.Infastructure.DbContexts
 		{
 		}
 		public DbSet<Movie> Movies { get; set; }
+		public DbSet<MovieCategory> MovieCategorys { get; set; }
 		public DbSet<MovieImage> MovieImages { get; set; }
 		public DbSet<MovieFeedBack> MovieFeedBacks { get; set; }
 		public DbSet<MovieTag> MovieTags { get; set; }
@@ -52,7 +53,23 @@ namespace E_Commerce.Infastructure.DbContexts
 					  .HasForeignKey(pf => pf.MovieId);
 			});
 
-			modelBuilder.Entity<MovieImage>(entity =>
+
+			modelBuilder.Entity<MovieCategory>(entity =>
+			{
+                entity.HasKey(p => p.Id);
+
+                entity.Property(p => p.Title)
+                      .IsRequired()
+                      .HasMaxLength(50);
+
+                entity.Property(p => p.Description);
+
+                entity.HasMany(p => p.Movies)
+                      .WithOne(pf => pf.MovieCategory)
+                      .HasForeignKey(pf => pf.CategoryId);
+            });
+
+            modelBuilder.Entity<MovieImage>(entity =>
 			{
 				entity.HasKey(pi => pi.Id); 
 
