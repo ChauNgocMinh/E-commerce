@@ -239,20 +239,17 @@
 <script>
     $(document).ready(function () {
         $("#changePasswordButton").click(function () {
-            // Xử lý thay đổi mật khẩu ở đây
             const oldPassword = $("#oldPassword").val();
             const newPassword = $("#newPassword").val();
             const confirmPassword = $("#confirmPassword").val();
 
-            // Kiểm tra xem mật khẩu mới và xác nhận mật khẩu mới có khớp hay không
             if (newPassword !== confirmPassword) {
                 alert("Mật khẩu mới và xác nhận mật khẩu không khớp.");
                 return;
             }
 
-            // Thực hiện AJAX hoặc logic thay đổi mật khẩu ở đây
             alert("Mật khẩu đã được thay đổi thành công.");
-            $('#changePasswordModal').modal('hide'); // Ẩn modal sau khi thay đổi mật khẩu
+            $('#changePasswordModal').modal('hide'); 
         });
     });
 </script>

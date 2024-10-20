@@ -9,8 +9,8 @@
 
     if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token); // Lưu token vào local storage
-        window.location.href = '/Home/Index'; // Chuyển hướng đến trang index
+        localStorage.setItem('token', data.token); 
+        window.location.href = '/Home/Index'; 
     } else {
         const errorData = await response.json();
         console.error('Login failed:', errorData);

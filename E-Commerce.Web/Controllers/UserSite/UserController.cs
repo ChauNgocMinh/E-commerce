@@ -22,6 +22,7 @@ namespace E_Commerce.Controllers.UserSite
         {
             _userManager = userManager;
             _signInManager = signInManager;
+
         }
 
         [HttpGet]
@@ -89,13 +90,14 @@ namespace E_Commerce.Controllers.UserSite
                     DisplayName = displayName,
                     PhoneNumber = phoneNumber,
                     DateOfBirth = dateOfBirth,
-                    Avata = avata ?? "default-avatar.png" 
+                    Avata = avata ?? "default-avatar.png"
                 };
 
                 var result = await _userManager.CreateAsync(user, password);
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "USER");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
