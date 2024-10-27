@@ -21,6 +21,7 @@ namespace E_Commerce.Infastructure.Install
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IGenericRepository<Movie>, GenericRepository<Movie>>();
+            services.AddScoped<IGenericRepository<MovieCategory>, GenericRepository<MovieCategory>>();
         }
     }
 }

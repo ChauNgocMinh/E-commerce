@@ -19,35 +19,52 @@
      };
 
  }
+ 
 <style>
     * {
         margin: 0;
         padding: 0;
-        list-style: none;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
         font-size: 16px;
     }
 
     a {
         text-decoration: none;
+        color: inherit; /* Kế thừa màu sắc của phần tử cha */
     }
 
-    .description-Right ul li {
-        background-color: black;
-        width: auto;
-        color: white;
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
     }
 
-    .description-Right button {
-        width: 100%;
-        background-color: black;
-        color: white;
-        padding: 10px;
+    .description-Right {
+        background-color: #222;
+        color: #fff;
+        padding: 20px;
         border-radius: 10px;
     }
 
+    .description-Right button {
+        background-color: #e63946; /* Màu nút */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+    .description-Right button:hover {
+        background-color: #d62839; /* Màu khi di chuột qua */
+    }
+
     .custom-border {
-        border: 1px solid black;
+        border: 1px solid #444;
         border-radius: 0.5rem;
+        background-color: #333; /* Màu nền của khung */
+        padding: 15px;
     }
 
     .review ul {
@@ -59,11 +76,24 @@
     .review li {
         flex: 0 0 30%;
         margin: 0 10px;
+        background-color: #f8f9fa; /* Màu nền của đánh giá */
+        padding: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s;
     }
 
-    .review ul .custom-border img {
+    .review li:hover {
+        transform: scale(1.05); /* Phóng to khi di chuột */
+    }
+
+    .review img {
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    .filmRecommand h2 {
+        margin: 20px 0;
+        color: #e63946; /* Màu tiêu đề */
     }
 
     .filmRecommand ul {
@@ -77,15 +107,31 @@
         flex: 1 1 200px;
         margin: 10px;
         max-width: 250px;
+        text-align: center;
+        transition: transform 0.3s;
     }
 
-        .filmRecommand li h7 {
-            font-weight: bold;
-        }
+    .filmRecommand li:hover {
+        transform: scale(1.05); 
+    }
 
     .filmRecommand img {
         max-width: 100%;
         height: auto;
+        border-radius: 10px; 
+    }
+
+    .filmRecommand h7 {
+        font-weight: bold;
+        color: #333; 
+    }
+
+    .btn-close{
+        width: 33px;
+        border: none;
+        background: red;
+        color: white;
+        border-radius: 2px;
     }
 </style>
 
@@ -103,7 +149,7 @@
                 <li class="me-2 p-2 rounded-3">Hành động</li>
                 <li class="me-2 p-2 rounded-3">120 phút</li>
             </ul>
-            <button>Xem ngay</button>
+            <button data-toggle="modal" data-target="#videoModal">Xem ngay</button>
             <div class="custom-border p-3 mt-3">
                 <h4>Giới thiệu</h4>
                 @Model.Description
@@ -147,5 +193,27 @@
                 </li>
             }
         </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Xem Video</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video controls style="width: 100%;">
+                    <source src="@Model.UrlMedia" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
     </div>
 </div>
