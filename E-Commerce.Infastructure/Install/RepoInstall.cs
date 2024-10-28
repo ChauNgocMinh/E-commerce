@@ -22,6 +22,8 @@ namespace E_Commerce.Infastructure.Install
         {
             services.AddScoped<IGenericRepository<Movie>, GenericRepository<Movie>>();
             services.AddScoped<IGenericRepository<MovieCategory>, GenericRepository<MovieCategory>>();
+            services.AddScoped<UserService>();
+
         }
     }
 }

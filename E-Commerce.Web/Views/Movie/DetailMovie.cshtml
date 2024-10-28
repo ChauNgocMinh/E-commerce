@@ -1,5 +1,11 @@
 ﻿@using E_Commerce.Application.Response.MovieResponse;
+@inject UserService UserService
 @model MovieResponse
+
+@{
+    bool isVipUser = await UserService.IsVipAsync();
+    bool isMovieFree = Model.IsFree;
+}
 
 @{
     ViewData["Title"] = "Movie Detail Page";
@@ -149,7 +155,14 @@
                 <li class="me-2 p-2 rounded-3">Hành động</li>
                 <li class="me-2 p-2 rounded-3">120 phút</li>
             </ul>
-            <button data-toggle="modal" data-target="#videoModal">Xem ngay</button>
+            @if (isMovieFree || isVipUser)
+            {
+                <button data-toggle="modal" data-target="#videoModal">Xem ngay</button>
+            }
+            else
+            {
+                <span>Chỉ dành cho tài khoản VIP</span>
+            }
             <div class="custom-border p-3 mt-3">
                 <h4>Giới thiệu</h4>
                 @Model.Description
