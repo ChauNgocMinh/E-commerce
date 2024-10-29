@@ -13,14 +13,12 @@ namespace E_Commerce.Controllers.AdminSite
     [Route("Admin/[controller]/[action]")]
     public class MovieManagementController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Movie> _MovieRepository;
         private readonly IGenericRepository<MovieCategory> _MovieCategoryRepository;
 
-        public MovieManagementController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieCategory> movieCategoryRepository)
+        public MovieManagementController(IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieCategory> movieCategoryRepository)
         {
-            _logger = logger;
             _mapper = mapper;
             _MovieRepository = MovieRepository;
             _MovieCategoryRepository = movieCategoryRepository;
