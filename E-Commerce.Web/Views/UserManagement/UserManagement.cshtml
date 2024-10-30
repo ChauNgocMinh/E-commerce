@@ -24,6 +24,7 @@
         border-radius: 10px;
         padding: 10px;
         background-color: #F7F2FA;
+        height: 80vh;
     }
 
     .menu {
@@ -57,32 +58,35 @@
         display: none;
         position: absolute;
         background-color: white;
-        width: 150px;
+        width: auto;
         border: 1px solid #ccc;
-        padding: 10px;
+        padding: 0; 
+        margin: 0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 2000;
         right: 0;
-    }
-
-    .toggle-action-menu {
-        position: relative;
-        z-index: 2001;
+        position: fixed;
     }
 
     .action-menu ul {
         list-style: none;
+        padding: 0;
+        margin: 0; 
     }
 
-        .action-menu ul li {
-            padding: 5px 0;
-        }
+    .action-menu ul li {
+        padding: 2px 0; 
+    }
 
-            .action-menu ul li a {
-                text-decoration: none;
-                color: black;
-                transition: color 0.3s;
-            }
+    .action-button {
+        text-align: left;
+        background: none; 
+        border: none;
+        cursor: pointer;
+        width: 100%; 
+        padding: 5px; 
+    }
+
 
     .btn-custom {
         background-color: #1a71d1;
@@ -96,9 +100,9 @@
         font-size: 14px;
     }
 
-        .btn-custom:hover {
-            background-color: #45a049;
-        }
+    .btn-custom:hover {
+        background-color: #45a049;
+    }
 
     .input-group {
         display: flex;
@@ -106,11 +110,11 @@
         position: relative;
     }
 
-        .input-group input {
-            padding-right: 40px;
-            border-radius: 20px;
-            width: 100%;
-        }
+    .input-group input {
+        padding-right: 40px;
+        border-radius: 20px;
+        width: 100%;
+    }
 </style>
 
 <div class="container w-75 mt-5">
@@ -127,9 +131,6 @@
                         <span class="input-icon">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
-                    </div>
-                    <div class="ml-3">
-                        <a asp-action="CreateUser" asp-controller="UserManagement" class="btn btn-custom">+ Thêm</a>
                     </div>
                 </div>
 
@@ -160,9 +161,27 @@
                                         <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
                                         <div class="action-menu">
                                             <ul>
-                                                <li><a asp-action="Details" asp-route-id="@user.Id" class="text-primary">Xem chi tiết</a></li>
-                                                <li><a asp-action="Edit" asp-route-id="@user.Id" class="text-warning">Sửa</a></li>
-                                                <li><a asp-action="Delete" asp-route-id="@user.Id" class="text-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">Xóa</a></li>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="ChangeUserVIP" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-primary">
+                                                            Chuyển tài khoản VIP
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="UpdateAdmin" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-warning">
+                                                            Cấp quyền Admin
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="DeleteUser" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                                            Xóa
+                                                        </button>
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>

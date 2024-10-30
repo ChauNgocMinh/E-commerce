@@ -9,6 +9,7 @@ namespace E_Commerce.Application.AutoMapping.ToMovieMapping
         public ToMovieMapping() 
         {
             CreateMap<Movie, MovieResponse>();
+            CreateMap<MovieFeedBack, MovieFeedBackResponse>();
             CreateMap<MovieImage, MovieImageResponse>();
             CreateMap<MovieTag, MovieTagResponse>();
             CreateMap<MovieViewModel, Movie>().ForMember(dest => dest.UrlMedia, opt => opt.Ignore());

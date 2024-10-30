@@ -26,9 +26,9 @@ public class HomeController : Controller
         return View(MovieResponses);
     }
 
-    public async Task<IActionResult> GetMovieByCategory(Guid IdCateglory)
+    public async Task<IActionResult> GetMovieByCategory(string IdCateglory)
     {
-        var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == IdCateglory, include: query => query.Include(o => o.MovieImages));
+        var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == Guid.Parse(IdCateglory), include: query => query.Include(o => o.MovieImages));
         var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
         return View(MovieResponses);
     }

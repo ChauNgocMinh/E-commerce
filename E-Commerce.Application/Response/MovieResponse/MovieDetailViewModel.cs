@@ -10,5 +10,6 @@ namespace E_Commerce.Application.Response.MovieResponse
     {
         public MovieResponse Movie { get; set; }
         public List<MovieFeedBackResponse> Feedbacks { get; set; }
+        public bool UserHasRated { get; set; } 
     }
 }

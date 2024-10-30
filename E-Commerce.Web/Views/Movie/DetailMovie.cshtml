@@ -37,7 +37,7 @@
 
     a {
         text-decoration: none;
-        color: inherit; /* Kế thừa màu sắc của phần tử cha */
+        color: inherit;
     }
 
     .container {
@@ -46,31 +46,36 @@
         padding: 20px;
     }
 
+    .rounded-3{
+        background-color: #2C2C2C;
+        color: white;
+    }
+
     .description-Right {
-        background-color: #222;
-        color: #fff;
+        background-color: #f9f9f9;
+        color: #333;
         padding: 20px;
         border-radius: 10px;
+        box-shadow: 0px 0px 10px gray;
     }
 
     .description-Right button {
-        background-color: #e63946; /* Màu nút */
+        background-color: #2C2C2C;
         color: white;
-        padding: 10px;
+        padding: 10px 15px;
         border-radius: 5px;
         border: none;
         transition: background-color 0.3s;
     }
 
     .description-Right button:hover {
-        background-color: #d62839; /* Màu khi di chuột qua */
+        background-color: #2C2C2C;
     }
 
     .custom-border {
-        border: 1px solid #444;
+        border: 1px solid black;
         border-radius: 0.5rem;
-        background-color: #333; /* Màu nền của khung */
-        padding: 15px;
+        background-color: white;
     }
 
     .review ul {
@@ -82,14 +87,16 @@
     .review li {
         flex: 0 0 30%;
         margin: 0 10px;
-        background-color: #f8f9fa; /* Màu nền của đánh giá */
+        background-color: #fff;
         padding: 15px;
         border-radius: 10px;
-        transition: transform 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     }
 
     .review li:hover {
-        transform: scale(1.05); /* Phóng to khi di chuột */
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .review img {
@@ -99,7 +106,8 @@
 
     .filmRecommand h2 {
         margin: 20px 0;
-        color: #e63946; /* Màu tiêu đề */
+        color: black;
+        font-weight: bold;
     }
 
     .filmRecommand ul {
@@ -114,42 +122,76 @@
         margin: 10px;
         max-width: 250px;
         text-align: center;
-        transition: transform 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .filmRecommand li:hover {
-        transform: scale(1.05); 
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
     }
 
     .filmRecommand img {
         max-width: 100%;
         height: auto;
-        border-radius: 10px; 
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .filmRecommand h7 {
         font-weight: bold;
-        color: #333; 
+        color: #555;
     }
 
-    .btn-close{
+    .btn-close {
         width: 33px;
         border: none;
-        background: red;
+        background: #dc3545;
         color: white;
         border-radius: 2px;
     }
+
+    .Tag p{
+        background: #CFF7D3;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        font-size: 17px;
+        display: inline-block;
+    }
+
+    .modal-dialog {
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .modal-content {
+        height: 450px;
+        overflow: hidden; 
+    }
+
+    .modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 326px;
+    }
+    video {
+        max-width: 100%; 
+        max-height: 100%; 
+    }
+
 </style>
+
 
 <div class="container mt-5">
     <div class="description row justify-content-center">
         <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
-            <img src="@Model.Movie.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
+            <img src="@Model.Movie.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover; border-radius: 10px;" alt="" />
         </div>
 
         <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
-            <h3>@Model.Movie.Name</h3>
-            <div class=" ">Tag</div>
+            <h3 style="font-weight: bold;">@Model.Movie.Name</h3>
+            <div class="Tag"><p>Tag</p></div>
             <ul class="list-unstyled d-flex">
                 <li class="me-2 p-2 rounded-3">Cổ trang</li>
                 <li class="me-2 p-2 rounded-3">Hành động</li>
@@ -169,11 +211,55 @@
             </div>
         </div>
     </div>
+    <div id="comment-section" class="mt-4">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!Model.UserHasRated) 
+            {
+                <h4>Đánh giá của bạn</h4>
+                <form asp-action="PostFeedback" asp-controller="Movie" method="post">
+                    <input type="hidden" name="MovieId" value="@Model.Movie.Id" />
+
+                    <div class="form-group">
+                        <label for="rating">Đánh giá</label>
+                        <select id="rating" class="form-control" name="Rating">
+                            <option value="1">1 sao</option>
+                            <option value="2">2 sao</option>
+                            <option value="3">3 sao</option>
+                            <option value="4">4 sao</option>
+                            <option value="5">5 sao</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="comment">Bình luận của bạn</label>
+                        <textarea id="comment" class="form-control" rows="4" name="Comment" placeholder="Viết bình luận..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Gửi đánh giá</button>
+                </form>
+            }
+            else
+            {
+                <p>Bạn đã đánh giá bộ phim này rồi. Cảm ơn bạn!</p>
+            }
+        }
+        else
+        {
+            <p>Vui lòng <a style="color: #0a58ca;" href="/User/Login">đăng nhập</a> để gửi đánh giá.</p>
+        }
+    </div>
 
     <!-- Đánh giá -->
-     <div id="feedback-section">
-        @await Html.PartialAsync("_MovieFeedback", Model.Feedbacks)
+    <div id="feedback-section" class="mt-4">
+        @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+        {
+            @await Html.PartialAsync("_MovieFeedback", Model.Feedbacks)
+        }
+        else
+        {
+            <p>Hiện tại chưa có đánh giá nào.</p>
+        }
     </div>
+
 
     <!-- Phim gợi ý -->
     <div class="filmRecommand align-content-center">
@@ -189,9 +275,8 @@
         </ul>
     </div>
 </div>
-
 <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="videoModalLabel">Xem Video</h5>
@@ -200,7 +285,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <video controls style="width: 100%;">
+                <video controls style="width: 100%; height: auto; object-fit: contain;">
                     <source src="@Model.Movie.UrlMedia" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>

@@ -24,6 +24,7 @@
         border-radius: 10px;
         padding: 10px;
         background-color: #F7F2FA;
+        height: 80vh;
     }
 
     .menu {
@@ -54,20 +55,21 @@
     }
 
     .action-menu {
-        display: none; /* Ẩn menu theo mặc định */
-        position: absolute; /* Để menu nổi lên */
+        display: none; 
+        position: absolute; 
         background-color: white;
         width: 150px;
         border: 1px solid #ccc;
         padding: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 2000; /* Đặt z-index cao hơn để nổi lên */
-        right: 0; /* Đặt menu ở bên phải */
+        z-index: 2000; 
+        right: 0; 
+        position: fixed;
     }
 
     .toggle-action-menu {
-        position: relative; /* Để menu nổi lên chính xác */
-        z-index: 2001; /* Đảm bảo biểu tượng cũng nổi lên */
+        position: relative; 
+        z-index: 2001;
     }
 
     .action-menu ul {
