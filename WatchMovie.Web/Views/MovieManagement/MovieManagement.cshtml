@@ -1,0 +1,211 @@
+﻿@using WatchMovie.Application.Response.MovieResponse
+@model IEnumerable<MovieResponse>
+
+@{
+    ViewData["Title"] = "Movie Manager Page";
+}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+    }
+
+    .input-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .box {
+        border: 2px solid #000;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #F7F2FA;
+        height: 80vh;
+    }
+
+    .menu {
+        background-color: #F8F9FC;
+        color: black;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+
+    .menu-item:hover {
+        background-color: #E8DEF8;
+        border-radius: 50px;
+    }
+
+    .item, .menu-item, th, td {
+        padding: 10px;
+    }
+
+    .bg-red, th {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .bg-white {
+        background-color: white;
+        color: black;
+    }
+
+    .action-menu {
+        display: none; 
+        position: absolute; 
+        background-color: white;
+        width: 150px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2000; 
+        right: 0; 
+        position: fixed;
+    }
+
+    .toggle-action-menu {
+        position: relative; 
+        z-index: 2001;
+    }
+
+    .action-menu ul {
+        list-style: none;
+    }
+
+    .action-menu ul li {
+        padding: 5px 0;
+    }
+
+    .action-menu ul li a {
+        text-decoration: none;
+        color: black;
+        transition: color 0.3s;
+    }
+
+    .btn-custom {
+        background-color: #1a71d1;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        font-size: 14px;
+    }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+        .input-group input {
+            padding-right: 40px;
+            border-radius: 20px;
+            width: 100%;
+        }
+
+    /* Thêm CSS cho cột trả phí */
+    .fee-status {
+        font-weight: bold;
+    }
+
+        .fee-status.free {
+            color: green; /* Màu xanh cho miễn phí */
+        }
+
+        .fee-status.paid {
+            color: red; /* Màu đỏ cho trả phí */
+        }
+</style>
+
+<div class="container w-75 mt-5">
+    <div class="row justify-content-around">
+        <div class="col-md-2">
+            @await Html.PartialAsync("_MenuAdminPartial")
+        </div>
+
+        <div class="col-md-9 mb-5">
+            <div class="box">
+                <div class="search d-flex justify-content-between align-items-center">
+                    <div class="input-group" style="width: 70%;">
+                        <input type="search" name="search" placeholder="Tìm kiếm" class="form-control" />
+                        <span class="input-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                    <div class="ml-3">
+                        <a asp-action="CreateMovie" asp-controller="MovieManagement" class="btn btn-custom">+ Thêm</a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Phim</th>
+                                <th>Mô Tả</th>
+                                <th>Trả phí</th>
+                                <th>Hình Ảnh Chính</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var movie in Model)
+                            {
+                                <tr>
+                                    <td>@movie.Id</td>
+                                    <td>@movie.Name</td>
+                                    <td>@movie.Description</td>
+                                    <td>
+                                        <span class="fee-status @(movie.IsFree ? "free" : "paid")">
+                                            @(movie.IsFree ? "Miễn phí" : "Trả phí")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <img src="@movie.MainImageUrl" alt="Main Image" style="width: 50px; height: auto;" />
+                                    </td>
+                                    <td class="position-relative">
+                                        <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
+                                        <div class="action-menu">
+                                            <ul>
+                                                <li><a asp-action="Details" asp-route-id="@movie.Id" class="text-primary">Xem chi tiết</a></li>
+                                                <li><a asp-action="Edit" asp-route-id="@movie.Id" class="text-warning">Sửa</a></li>
+                                                <li><a asp-action="Delete" asp-route-id="@movie.Id" class="text-danger">Xóa</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.toggle-action-menu').forEach(item => {
+        item.addEventListener('click', event => {
+            const actionMenu = item.nextElementSibling;
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                if (menu !== actionMenu) {
+                    menu.style.display = 'none';
+                }
+            });
+            actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>

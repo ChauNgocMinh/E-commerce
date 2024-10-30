@@ -1,0 +1,210 @@
+﻿@using WatchMovie.Application.Response.UserResponse
+@model IEnumerable<UserResponse>
+
+@{
+    ViewData["Title"] = "User Manager Page";
+}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+    }
+
+    .input-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .box {
+        border: 2px solid #000;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #F7F2FA;
+        height: 80vh;
+    }
+
+    .menu {
+        background-color: #F8F9FC;
+        color: black;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+
+    .menu-item:hover {
+        background-color: #E8DEF8;
+        border-radius: 50px;
+    }
+
+    .item, .menu-item, th, td {
+        padding: 10px;
+    }
+
+    .bg-red, th {
+        background-color: #F8F9FC;
+        color: black;
+    }
+
+    .bg-white {
+        background-color: white;
+        color: black;
+    }
+
+    .action-menu {
+        display: none;
+        position: absolute;
+        background-color: white;
+        width: auto;
+        border: 1px solid #ccc;
+        padding: 0; 
+        margin: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2000;
+        right: 0;
+        position: fixed;
+    }
+
+    .action-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0; 
+    }
+
+    .action-menu ul li {
+        padding: 2px 0; 
+    }
+
+    .action-button {
+        text-align: left;
+        background: none; 
+        border: none;
+        cursor: pointer;
+        width: 100%; 
+        padding: 5px; 
+    }
+
+
+    .btn-custom {
+        background-color: #1a71d1;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        font-size: 14px;
+    }
+
+    .btn-custom:hover {
+        background-color: #45a049;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .input-group input {
+        padding-right: 40px;
+        border-radius: 20px;
+        width: 100%;
+    }
+</style>
+
+<div class="container w-75 mt-5">
+    <div class="row justify-content-around">
+        <div class="col-md-2">
+            @await Html.PartialAsync("_MenuAdminPartial")
+        </div>
+
+        <div class="col-md-9 mb-5">
+            <div class="box">
+                <div class="search d-flex justify-content-between align-items-center">
+                    <div class="input-group" style="width: 70%;">
+                        <input type="search" name="search" placeholder="Tìm kiếm người dùng" class="form-control" />
+                        <span class="input-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Tên Hiển Thị</th>
+                                <th>Ngày Sinh</th>
+                                <th>VIP</th>
+                                <th>Chức vụ</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Id</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.DisplayName</td>
+                                    <td>@user.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                                    <td>@(user.IsVip ? "Yes" : "No")</td>
+                                    <td>@string.Join(", ", user.Roles)</td>
+                                    <td class="position-relative">
+                                        <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
+                                        <div class="action-menu">
+                                            <ul>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="ChangeUserVIP" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-primary">
+                                                            Chuyển tài khoản VIP
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="UpdateAdmin" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-warning">
+                                                            Cấp quyền Admin
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form asp-controller="UserManagement" asp-action="DeleteUser" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                                        <button type="submit" class="action-button text-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                                            Xóa
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.toggle-action-menu').forEach(item => {
+        item.addEventListener('click', event => {
+            const actionMenu = item.nextElementSibling;
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                if (menu !== actionMenu) {
+                    menu.style.display = 'none';
+                }
+            });
+            actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>

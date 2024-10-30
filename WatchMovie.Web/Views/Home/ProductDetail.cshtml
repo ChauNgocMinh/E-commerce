@@ -1,0 +1,154 @@
+﻿@using WatchMovie.Application.Response.MovieResponse;
+@model MovieResponse
+
+@{
+    ViewData["Title"] = "Movie Detail Page";
+
+    // Danh sách các đánh giá
+    var reviews = new List<dynamic>
+    {
+        new { Title = "Review Title 1", Body = "Review Body 1", Name = "Review Name 1", Stars = 5, Image = "/userreview.png" },
+        new { Title = "Review Title 2", Body = "Review Body 2", Name = "Review Name 2", Stars = 4, Image = "/userreview.png" },
+        new { Title = "Review Title 3", Body = "Review Body 3", Name = "Review Name 3", Stars = 5, Image = "/userreview.png" }
+    };
+
+    // Danh sách các phim gợi ý
+    var films = new List<dynamic>
+    {
+        new { Title = "Liên hoa lâu", Image = "/lienhoalau.png" },
+        new { Title = "Đường triều Qủy Sự Lục", Image = "/duongtrieuquysuluc.png" },
+        new { Title = "Nạn nhân không hoàn hảo", Image = "/nannhankhonghoanhao.jpg" },
+        new { Title = "Thợ săn tí hon", Image = "/thosantihon.png" }
+    };
+
+}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .description-Right ul li {
+        background-color: black;
+        width: auto;
+        color: white;
+    }
+
+    .description-Right button {
+        width: 100%;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .custom-border {
+        border: 1px solid black;
+        border-radius: 0.5rem;
+    }
+
+    .review ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .review li {
+        flex: 0 0 30%;
+        margin: 0 10px;
+    }
+
+    .review ul .custom-border img {
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .filmRecommand ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .filmRecommand li {
+        flex: 1 1 200px;
+        margin: 10px;
+        max-width: 250px;
+    }
+
+        .filmRecommand li h7 {
+            font-weight: bold;
+        }
+
+    .filmRecommand img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="description row justify-content-center">
+        <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
+            <img src="~/duongtrieuquysuluc.png" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
+        </div>
+
+        <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
+            <h3>Đường triều Qủy Sư Lục</h3>
+            <div class=" ">Tag</div>
+            <ul class="list-unstyled d-flex">
+                <li class="me-2 p-2 rounded-3">Cổ trang</li>
+                <li class="me-2 p-2 rounded-3">Hành động</li>
+                <li class="me-2 p-2 rounded-3">120 phút</li>
+            </ul>
+            <button>Xem ngay</button>
+            <div class="custom-border p-3 mt-3">
+                <h4>Giới thiệu</h4>
+                Đường Triều Quỷ Sự Lục 2: Tây Hành là một bộ phim trinh thám cổ trang do Bá Sam ("Đường Triều Quỷ Sự Lục - Ký Sự Chuyện Kỳ Dị Đường Triều") làm đạo diễn chính, với sự tham gia của Dương Húc Văn ("Đường Triều Quỷ Sự Lục") và Dương Chí Cương ("Đường Triều Quỷ Sự Lục") đảm nhận vai chính. Bộ phim được chuyển thể từ tiểu thuyết cùng tên của tác giả Nguy Phong Hoa, là phần thứ hai trong loạt truyện "Đường Triều Quỷ Sự Lục". 
+            </div>
+        </div>
+    </div>
+
+    <!-- Đánh giá -->
+    <div class="review mt-4">
+        <h4>Đánh giá</h4>
+        <ul class="list-unstyled">
+            @foreach (var review in reviews)
+            {
+                <li class="me-2 p-2 rounded-3 mb-3 custom-border">
+                    <div class="d-flex">
+                        @for (int i = 0; i < review.Stars; i++)
+                        {
+                            <i class="fa-regular fa-star"></i>
+                        }
+                    </div>
+                    <h5>@review.Title</h5>
+                    <span>@review.Body</span>
+                    <div class="d-flex align-items-center mt-2">
+                        <img src="@review.Image" alt="" class="me-2" style="width: 50px; height: 50px;" />
+                        <span>@review.Name</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <!-- Phim gợi ý -->
+    <div class="filmRecommand align-content-center">
+        <h2 class="text-center">Có thể bạn sẽ thích</h2>
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+            @foreach (var film in films)
+            {
+                <li class="me-2 p-2 rounded-3 custom-border">
+                    <img src="@film.Image" alt="@film.Title" style="max-width: 100%; height: auto;" />
+                    <h7>@film.Title</h7>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
