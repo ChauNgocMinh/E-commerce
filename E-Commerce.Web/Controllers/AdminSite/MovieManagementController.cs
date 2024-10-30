@@ -15,13 +15,15 @@ namespace E_Commerce.Controllers.AdminSite
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Movie> _MovieRepository;
+        private readonly IGenericRepository<MovieImage> _MovieImageRepository;
         private readonly IGenericRepository<MovieCategory> _MovieCategoryRepository;
 
-        public MovieManagementController(IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieCategory> movieCategoryRepository)
+        public MovieManagementController(IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieCategory> movieCategoryRepository, IGenericRepository<MovieImage> movieImageRepository)
         {
             _mapper = mapper;
             _MovieRepository = MovieRepository;
             _MovieCategoryRepository = movieCategoryRepository;
+            _MovieImageRepository = movieImageRepository;
         }
         public async Task<IActionResult> MovieManagement()
         {
@@ -64,11 +66,32 @@ namespace E_Commerce.Controllers.AdminSite
                     movie.UrlMedia = "/videos/" + fileName;
                 }
                 await _MovieRepository.AddAsync(movie);
+                if (model.MovieImgBanner != null && model.MovieImgBanner.Length > 0)
+                {
+                    var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    if (!Directory.Exists(imageFolder))
+                    {
+                        Directory.CreateDirectory(imageFolder);
+                    }
+                    var imageFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.MovieImgBanner.FileName);
+                    var imageFilePath = Path.Combine(imageFolder, imageFileName);
+                    using (var fileStream = new FileStream(imageFilePath, FileMode.Create))
+                    {
+                        await model.MovieImgBanner.CopyToAsync(fileStream);
+                    }
+                    var movieImage = new MovieImage
+                    {
+                        UrlImage = "/images/" + imageFileName,
+                        IsMain = true,
+                        MovieId = movie.Id 
+                    };
+                    await _MovieImageRepository.AddAsync(movieImage);
+                }
+
                 return RedirectToAction("MovieManagement");
             }
 
             return View(model);
         }
-
     }
 }

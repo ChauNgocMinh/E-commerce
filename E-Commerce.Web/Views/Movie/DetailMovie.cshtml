@@ -1,10 +1,10 @@
 ﻿@using E_Commerce.Application.Response.MovieResponse;
 @inject UserService UserService
-@model MovieResponse
+@model MovieDetailViewModel
 
 @{
     bool isVipUser = await UserService.IsVipAsync();
-    bool isMovieFree = Model.IsFree;
+    bool isMovieFree = Model.Movie.IsFree;
 }
 
 @{
@@ -144,11 +144,11 @@
 <div class="container mt-5">
     <div class="description row justify-content-center">
         <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
-            <img src="@Model.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
+            <img src="@Model.Movie.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover;" alt="" />
         </div>
 
         <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
-            <h3>@Model.Name</h3>
+            <h3>@Model.Movie.Name</h3>
             <div class=" ">Tag</div>
             <ul class="list-unstyled d-flex">
                 <li class="me-2 p-2 rounded-3">Cổ trang</li>
@@ -165,33 +165,14 @@
             }
             <div class="custom-border p-3 mt-3">
                 <h4>Giới thiệu</h4>
-                @Model.Description
+                @Model.Movie.Description
             </div>
         </div>
     </div>
 
     <!-- Đánh giá -->
-    <div class="review mt-4">
-        <h4>Đánh giá</h4>
-        <ul class="list-unstyled">
-            @foreach (var review in reviews)
-            {
-                <li class="me-2 p-2 rounded-3 mb-3 custom-border">
-                    <div class="d-flex">
-                        @for (int i = 0; i < review.Stars; i++)
-                        {
-                            <i class="fa-regular fa-star"></i>
-                        }
-                    </div>
-                    <h5>@review.Title</h5>
-                    <span>@review.Body</span>
-                    <div class="d-flex align-items-center mt-2">
-                        <img src="@review.Image" alt="" class="me-2" style="width: 50px; height: 50px;" />
-                        <span>@review.Name</span>
-                    </div>
-                </li>
-            }
-        </ul>
+     <div id="feedback-section">
+        @await Html.PartialAsync("_MovieFeedback", Model.Feedbacks)
     </div>
 
     <!-- Phim gợi ý -->
@@ -220,7 +201,7 @@
             </div>
             <div class="modal-body">
                 <video controls style="width: 100%;">
-                    <source src="@Model.UrlMedia" type="video/mp4">
+                    <source src="@Model.Movie.UrlMedia" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
