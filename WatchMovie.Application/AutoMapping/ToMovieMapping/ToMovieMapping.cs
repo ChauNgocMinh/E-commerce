@@ -13,6 +13,7 @@ namespace WatchMovie.Application.AutoMapping.ToMovieMapping
             CreateMap<MovieImage, MovieImageResponse>();
             CreateMap<MovieTag, MovieTagResponse>();
             CreateMap<MovieViewModel, Movie>().ForMember(dest => dest.UrlMedia, opt => opt.Ignore());
+            CreateMap<Movie, MovieViewModel>();
         }
     }
 }

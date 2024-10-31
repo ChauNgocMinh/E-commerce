@@ -45,7 +45,7 @@
         border: 1px solid black;
         border-radius: 8px;
         padding: 16px;
-        width: 240px;
+        width: 200px;
         height: fit-content;
     }
 
@@ -98,6 +98,33 @@
         font-weight: bold;
     }
 
+    .card {
+        border: 1px solid #000; /* Kẻ khung cho card */
+        border-radius: 8px; /* Bo góc cho card */
+        overflow: hidden; /* Giúp bo góc ảnh */
+        height: auto; /* Đặt chiều cao cho card */
+    }
+
+    .card-img-top {
+        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của card */
+        height: 200px; /* Đặt chiều cao cố định cho ảnh */
+        object-fit: cover; /* Giữ tỉ lệ ảnh, cắt bớt nếu cần */
+    }
+
+    .title-movie {
+        white-space: nowrap; /* Không cho xuống dòng */
+        overflow: hidden; /* Ẩn phần không vừa */
+        text-overflow: ellipsis; /* Thêm dấu ba chấm khi cắt bớt */
+        max-width: 100%; /* Giới hạn chiều rộng tối đa */
+    }
+
+    .keyword-item {
+        white-space: nowrap; /* Không cho xuống dòng */
+        overflow: hidden; /* Ẩn phần không vừa */
+        text-overflow: ellipsis; /* Thêm dấu ba chấm khi cắt bớt */
+        max-width: 100%; /* Giới hạn chiều rộng tối đa */
+    }
+
     .movie-cart {
         margin: 20px 0;
     }
@@ -133,7 +160,7 @@
                 <label><input type="checkbox"> Option 4</label>
             </div>
         </div>
-        <div class="conten-main col-9">
+        <div class="conten-main col-10">
             <div class="row justify-content-between">
                 <div class="search-conten col-4">
                     <div class="input-group">
@@ -149,19 +176,22 @@
                     <span class="keyword-item">Rating</span>
                 </div>
             </div>
-            <div class="row movie-cart ">
-                @foreach(var item in Model)
+            <div class="row movie-cart">
+                @foreach (var item in Model)
                 {
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
                         <div class="card">
                             <img src="@item.MainImageUrl" class="card-img-top" alt="Image Movie">
                             <div class="card-body">
-                                <h5 class="title-movie"><a asp-area="" asp-controller="Movie" asp-action="DetailMovie" asp-route-Id="@item.Id">@item.Name</a></h5>
+                                <h5 class="title-movie">
+                                    <a asp-area="" asp-controller="Movie" asp-action="DetailMovie" asp-route-Id="@item.Id">@item.Name</a>
+                                </h5>
                                 <div class="keyword">
                                     @foreach (var tag in item.MovieTags)
                                     {
                                         <span class="keyword-item selected">@tag.Name</span>
                                     }
+                                    <span class="keyword-item selected">Phim hay</span>
                                 </div>
                             </div>
                         </div>

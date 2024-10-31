@@ -7,10 +7,12 @@ using WatchMovie.Domain.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WatchMovie.Controllers.AdminSite
 {
     [Route("Admin/[controller]/[action]")]
+    [Authorize]
     public class MovieManagementController : Controller
     {
         private readonly IMapper _mapper;
@@ -27,10 +29,23 @@ namespace WatchMovie.Controllers.AdminSite
         }
         public async Task<IActionResult> MovieManagement()
         {
-            var listMovie = await _MovieRepository.GetAllAsync(x => true, include: db => db.Include(x => x.MovieTags));
+            var listMovie = await _MovieRepository.GetAllAsync(x => true, include: db => db.Include(x => x.MovieTags).Include(x => x.MovieImages));
             var MovieResponses = _mapper.Map<List<MovieResponse>>(listMovie);
             return View(MovieResponses);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DetailMovie(Guid id)
+        {
+            var movie = await _MovieRepository.GetByIdAsync(id, db => db.Include(x => x.MovieImages).Include(x => x.MovieCategory));
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            var model = _mapper.Map<MovieResponse>(movie);
+            return View(model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> CreateMovie()
         {
@@ -47,6 +62,11 @@ namespace WatchMovie.Controllers.AdminSite
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateMovie(MovieViewModel model)
         {
+            if (model.VideoFile != null && model.VideoFile.Length > 100 * 1024 * 1024)
+            {
+                ModelState.AddModelError("VideoFile", "File video quá lớn. Kích thước tối đa là 100MB.");
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
                 var movie = _mapper.Map<Movie>(model);
@@ -90,8 +110,80 @@ namespace WatchMovie.Controllers.AdminSite
 
                 return RedirectToAction("MovieManagement");
             }
+            ModelState.AddModelError("Lỗi", "Có lỗi khi tao mới phim");
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var movie = await _MovieRepository.GetByIdAsync(id);
+            if (movie != null)
+            {
+                await _MovieRepository.DeleteAsync(id); 
+            }
+            return RedirectToAction("MovieManagement"); 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var movie = await _MovieRepository.GetByIdAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            var model = _mapper.Map<MovieViewModel>(movie);
+            var categories = await _MovieCategoryRepository.GetAllAsync();
+
+            ViewBag.Categories = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Title
+            }).ToList();
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MovieViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var movie = await _MovieRepository.GetByIdAsync(model.Id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
+
+                movie.Name = model.Name;
+                movie.Description = model.Description;
+                movie.IsFree = model.IsFree;
+                movie.CategoryId = model.CategoryId;
+
+                if (model.VideoFile != null && model.VideoFile.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/videos");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.VideoFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.VideoFile.CopyToAsync(fileStream);
+                    }
+                    movie.UrlMedia = "/videos/" + fileName;
+                }
+
+                await _MovieRepository.UpdateAsync(movie);
+                return RedirectToAction("MovieManagement");
+            }
+
+            return View(model);
+        }
+
     }
 }

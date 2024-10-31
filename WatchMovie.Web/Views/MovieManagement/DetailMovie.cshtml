@@ -1,0 +1,58 @@
+﻿@model WatchMovie.Application.Response.MovieResponse.MovieResponse
+
+<style>
+    .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .movie-details {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .movie-details div {
+        margin-bottom: 15px;
+    }
+
+    .btn-secondary {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="movie-details">
+    <h2 class="page-title">Chi tiết phim</h2>
+
+    <div>
+        <strong>Tên phim:</strong> @Model.Name
+    </div>
+    <div>
+        <strong>Mô tả:</strong> @Model.Description
+    </div>
+    <div>
+        <strong>Thể loại:</strong> @Model.MovieCategory.Title
+    </div>
+    <div>
+        <strong>Miễn phí:</strong> @Model.IsFree
+    </div>
+    <div>
+        <strong>Hình ảnh:</strong>
+        <img src="@Model.MainImageUrl" alt="Image Movie" style="max-width:100%; height:auto;" />
+    </div>
+    <div>
+        <strong>Video:</strong>
+        <video width="100%" controls>
+            <source src="@Model.UrlMedia" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <a asp-controller="MovieManagement" asp-action="MovieManagement" class="btn btn-secondary">Trở về</a>
+</div>

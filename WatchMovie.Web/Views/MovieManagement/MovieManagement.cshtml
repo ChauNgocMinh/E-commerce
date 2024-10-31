@@ -60,7 +60,6 @@
         background-color: white;
         width: 150px;
         border: 1px solid #ccc;
-        padding: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 2000; 
         right: 0; 
@@ -69,21 +68,23 @@
 
     .toggle-action-menu {
         position: relative; 
-        z-index: 2001;
     }
 
     .action-menu ul {
         list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
-    .action-menu ul li {
-        padding: 5px 0;
+    .action-menu ul li{
+        margin: 5px 0 10px 10px;
     }
-
     .action-menu ul li a {
         text-decoration: none;
         color: black;
         transition: color 0.3s;
+        width: 100%;
+        display: block;
     }
 
     .btn-custom {
@@ -180,9 +181,11 @@
                                         <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
                                         <div class="action-menu">
                                             <ul>
-                                                <li><a asp-action="Details" asp-route-id="@movie.Id" class="text-primary">Xem chi tiết</a></li>
+                                                <li><a asp-action="DetailMovie" asp-route-id="@movie.Id" class="text-primary">Xem chi tiết</a></li>
                                                 <li><a asp-action="Edit" asp-route-id="@movie.Id" class="text-warning">Sửa</a></li>
-                                                <li><a asp-action="Delete" asp-route-id="@movie.Id" class="text-danger">Xóa</a></li>
+                                                <li>
+                                                    <a href="javascript:void(0);" onclick="confirmDelete('@movie.Id');" class="text-danger">Xóa</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -208,4 +211,20 @@
             actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
         });
     });
+
+    function confirmDelete(movieId) {
+        if (confirm("Bạn có chắc chắn muốn xóa phim này không?")) {
+            $.ajax({
+                url: '@Url.Action("Delete", "MovieManagement")',
+                type: 'POST',
+                data: { id: movieId }, // gửi id phim
+                success: function () {
+                    window.location.reload(); // làm mới trang
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi xóa phim.');
+                }
+            });
+        }
+    }
 </script>

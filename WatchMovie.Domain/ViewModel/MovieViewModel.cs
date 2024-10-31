@@ -4,6 +4,7 @@ namespace WatchMovie.Domain.ViewModel
 {
     public class MovieViewModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public bool IsFree { get; set; }

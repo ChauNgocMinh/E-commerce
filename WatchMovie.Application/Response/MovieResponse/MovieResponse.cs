@@ -11,5 +11,6 @@
         public string MainImageUrl => MovieImages?.FirstOrDefault(img => img.IsMain)?.UrlImage ?? "";
         public virtual ICollection<MovieImageResponse> MovieImages { get; set; }
         public virtual ICollection<MovieTagResponse> MovieTags { get; set; }
+        public virtual MovieCategoryResponse MovieCategory { get; set; }
     }
 }

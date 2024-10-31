@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using WatchMovie.Application.Response.MovieCategoryResponse;
+using WatchMovie.Application.Response.MovieResponse;
 using WatchMovie.Domain.Entities.Movies;
 namespace WatchMovie.Application.AutoMapping.ToMovieCategoryMapping
 {

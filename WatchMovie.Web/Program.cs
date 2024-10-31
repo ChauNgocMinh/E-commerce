@@ -3,6 +3,7 @@ using WatchMovie.Infastructure.Install;
 using WatchMovie.Infastructure.Persistence;
 using System;
 using static System.Formats.Asn1.AsnWriter;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,12 @@ builder.Services.AddControllersWithViews();
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 	.AddJsonFile("Config/appsettings.json", optional: false, reloadOnChange: true);
 
-builder.Services.InstallServicesInAssembly(builder.Configuration);
+builder.Services.InstallServicesInAssembly(builder.Configuration); 
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 1024 * 1024 * 1024;
+});
 
 builder.Services.AddControllersWithViews();
 

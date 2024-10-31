@@ -4,10 +4,12 @@ using WatchMovie.Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WatchMovie.Controllers.AdminSite
 {
     [Route("Admin/[controller]/[action]")]
+    [Authorize]
     public class UserManagementController : Controller
     {
         private readonly UserManager<User> _userManager;

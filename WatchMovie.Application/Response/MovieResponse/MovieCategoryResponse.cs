@@ -1,4 +1,4 @@
-﻿namespace WatchMovie.Application.Response.MovieCategoryResponse
+﻿namespace WatchMovie.Application.Response.MovieResponse
 {
     public class MovieCategoryResponse
     {
