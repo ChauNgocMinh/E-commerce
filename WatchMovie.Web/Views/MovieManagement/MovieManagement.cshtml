@@ -100,9 +100,9 @@
         font-size: 14px;
     }
 
-        .btn-custom:hover {
-            background-color: #45a049;
-        }
+    .btn-custom:hover {
+        background-color: #45a049;
+    }
 
     .input-group {
         display: flex;
@@ -110,24 +110,22 @@
         position: relative;
     }
 
-        .input-group input {
-            padding-right: 40px;
-            border-radius: 20px;
-            width: 100%;
-        }
+    .input-group input {
+        border-radius: 20px;
+        width: 100%;
+    }
 
-    /* Thêm CSS cho cột trả phí */
     .fee-status {
         font-weight: bold;
     }
 
-        .fee-status.free {
-            color: green; /* Màu xanh cho miễn phí */
-        }
+    .fee-status.free {
+        color: green; 
+    }
 
-        .fee-status.paid {
-            color: red; /* Màu đỏ cho trả phí */
-        }
+    .fee-status.paid {
+        color: red;
+    }
 </style>
 
 <div class="container w-75 mt-5">
@@ -139,12 +137,9 @@
         <div class="col-md-9 mb-5">
             <div class="box">
                 <div class="search d-flex justify-content-between align-items-center">
-                    <div class="input-group" style="width: 70%;">
+                    <form asp-controller="MovieManagement" asp-action="MovieManagement" method="get" class="input-group" style="width: 70%;">
                         <input type="search" name="search" placeholder="Tìm kiếm" class="form-control" />
-                        <span class="input-icon">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
-                    </div>
+                    </form>
                     <div class="ml-3">
                         <a asp-action="CreateMovie" asp-controller="MovieManagement" class="btn btn-custom">+ Thêm</a>
                     </div>
@@ -163,33 +158,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var movie in Model)
+                            @if (!Model.Any())
                             {
                                 <tr>
-                                    <td>@movie.Id</td>
-                                    <td>@movie.Name</td>
-                                    <td>@movie.Description</td>
-                                    <td>
-                                        <span class="fee-status @(movie.IsFree ? "free" : "paid")">
-                                            @(movie.IsFree ? "Miễn phí" : "Trả phí")
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <img src="@movie.MainImageUrl" alt="Main Image" style="width: 50px; height: auto;" />
-                                    </td>
-                                    <td class="position-relative">
-                                        <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
-                                        <div class="action-menu">
-                                            <ul>
-                                                <li><a asp-action="DetailMovie" asp-route-id="@movie.Id" class="text-primary">Xem chi tiết</a></li>
-                                                <li><a asp-action="Edit" asp-route-id="@movie.Id" class="text-warning">Sửa</a></li>
-                                                <li>
-                                                    <a href="javascript:void(0);" onclick="confirmDelete('@movie.Id');" class="text-danger">Xóa</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                                    <td colspan="6" class="text-center text-danger">Hiện tại không có phim nào để hiển thị.</td>
                                 </tr>
+                            }
+                            else
+                            {
+                                @foreach (var movie in Model)
+                                {
+                                    <tr>
+                                        <td>@movie.Id</td>
+                                        <td>@movie.Name</td>
+                                        <td>@movie.Description</td>
+                                        <td>
+                                            <span class="fee-status @(movie.IsFree ? "free" : "paid")">
+                                                @(movie.IsFree ? "Miễn phí" : "Trả phí")
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <img src="@movie.MainImageUrl" alt="Main Image" style="width: 50px; height: auto;" />
+                                        </td>
+                                        <td class="position-relative">
+                                            <i class="fa-solid fa-ellipsis-vertical toggle-action-menu" style="cursor: pointer;"></i>
+                                            <div class="action-menu">
+                                                <ul>
+                                                    <li><a asp-action="DetailMovie" asp-route-id="@movie.Id" class="text-primary">Xem chi tiết</a></li>
+                                                    <li><a asp-action="Edit" asp-route-id="@movie.Id" class="text-warning">Sửa</a></li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" onclick="confirmDelete('@movie.Id');" class="text-danger">Xóa</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>

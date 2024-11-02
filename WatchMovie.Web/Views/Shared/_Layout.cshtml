@@ -31,15 +31,17 @@
 
     .form-control {
         flex-grow: 1;
+        padding-right: 0;
     }
 
     .search-icon {
-        right: 15px;
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
         color: #000;
         pointer-events: none;
     }
+
 
     .nav-1 img {
         width: 150px;
@@ -70,10 +72,14 @@
                     <img src="~/Img/Logo.png" alt="Logo SNAT" style="width: 150px;" />
                 </a>
 
-                <div class="nav-search d-flex mx-3 position-relative" style="flex: 2;">
-                    <input type="text" class="form-control" placeholder="Search..." />
-                    <i class="fas fa-search position-absolute search-icon"></i>
-                </div>
+                <form asp-controller="Movie" asp-action="SearchMovie" method="get" class="nav-search d-flex mx-3 position-relative" style="flex: 2;">
+                    <input type="text" name="query" class="form-control" placeholder="Search..." style="padding: 10px;" />
+                    <button type="submit" class="position-absolute search-icon btn p-0" style="background: none; border: none; right: 50px; top: 50%; transform: translateY(-50%);">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+
+
 
                 <div class="nav-menu" style="flex: 1;">
                     <ul class="nav-list-items d-flex list-unstyled m-0 justify-content-end">
@@ -128,16 +134,16 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav d-flex flex-wrap list-unstyled m-0">
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">ĐỀ XUẤT</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="" >ĐỀ XUẤT</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">HÀNH ĐỘNG</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="GetMovieByCategory" asp-route-IdCateglory="17FB8F8A-4340-440C-A62A-C058549EBF1D">HÀNH ĐỘNG</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">TÌNH CẢM</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="GetMovieByCategory" asp-route-IdCateglory="79A74912-FC17-4B54-B28A-62C854E1A1C1">TÌNH CẢM</a>
                                 </li>
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GetMovieByCategory">HOẠT HÌNH</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="GetMovieByCategory" asp-route-IdCateglory="5AF44E64-4B18-48B6-A9C0-FEE441CA523C">HOẠT HÌNH</a>
                                 </li>
                                 <li class="nav-item mx-2">
                                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">THÊM...</a>

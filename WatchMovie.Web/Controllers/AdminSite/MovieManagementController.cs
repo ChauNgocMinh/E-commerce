@@ -27,9 +27,17 @@ namespace WatchMovie.Controllers.AdminSite
             _MovieCategoryRepository = movieCategoryRepository;
             _MovieImageRepository = movieImageRepository;
         }
-        public async Task<IActionResult> MovieManagement()
+
+        [HttpGet]
+        public async Task<IActionResult> MovieManagement(string search)
         {
-            var listMovie = await _MovieRepository.GetAllAsync(x => true, include: db => db.Include(x => x.MovieTags).Include(x => x.MovieImages));
+            var listMovie = string.IsNullOrWhiteSpace(search)
+                ? await _MovieRepository.GetAllAsync(x => true, include: db => db.Include(x => x.MovieTags).Include(x => x.MovieImages))
+                : await _MovieRepository.GetAllAsync(
+                    x => x.Name.ToLower().Contains(search.ToLower()),
+                    include: db => db.Include(x => x.MovieTags).Include(x => x.MovieImages)
+                  );
+
             var MovieResponses = _mapper.Map<List<MovieResponse>>(listMovie);
             return View(MovieResponses);
         }

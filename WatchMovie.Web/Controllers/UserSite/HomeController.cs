@@ -25,37 +25,7 @@ public class HomeController : Controller
         var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
         return View(MovieResponses);
     }
-
-    public async Task<IActionResult> GetMovieByCategory(string IdCateglory)
-    {
-        var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == Guid.Parse(IdCateglory), include: query => query.Include(o => o.MovieImages));
-        var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
-        return View(MovieResponses);
-    }
-    public IActionResult Rank()
-    {
-        return View();
-    }
-    public IActionResult Account()
-    {
-        return View();
-    }
-    public IActionResult Login()
-    {
-        return View();
-    }
-    public IActionResult MovieDetail()
-    {
-        return View();
-    }
-    public IActionResult MovieManager()
-    {
-        return View();
-    }
-    public IActionResult UserManager()
-    {
-        return View();
-    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

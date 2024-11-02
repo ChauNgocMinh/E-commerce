@@ -22,6 +22,24 @@ namespace WatchMovie.Controllers.UserSite
             _MovieRepository = MovieRepository;
             _MovieFeedBackcontext = MovieFeedBackcontext;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMovieByCategory(string IdCateglory)
+        {
+            var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == Guid.Parse(IdCateglory), include: query => query.Include(o => o.MovieImages));
+            var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
+            return View(MovieResponses);
+        }
+        [HttpGet]
+        public async Task<IActionResult> SearchMovie(string query)
+        {
+            var searchedMovies = await _MovieRepository.GetAllAsync(
+                x => x.Name.ToLower().Contains(query.ToLower()),
+                include: q => q.Include(o => o.MovieImages)
+            );
+            var searchedMovieResponses = _mapper.Map<List<MovieResponse>>(searchedMovies);
+            return View(searchedMovieResponses);
+        }
+
         public async Task<IActionResult> DetailMovie(Guid Id)
         {
             var movie = await _MovieRepository.GetByIdAsync(Id, include: query => query.Include(o => o.MovieImages));
