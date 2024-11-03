@@ -236,6 +236,25 @@
     </div>
 </div>
 
+<div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="qrCodeModalLabel">Nạp VIP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Quét mã QR dưới đây để chuyển tiền nâng cấp VIP:</p>
+                <img id="qrCodeImage" src="/Img/Payment.jpg" alt="QR Code" class="img-fluid" />
+                <p class="mt-3">Số tiền: 100.000 VNĐ</p> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
         $("#changePasswordButton").click(function () {
@@ -252,4 +271,9 @@
             $('#changePasswordModal').modal('hide'); 
         });
     });
+
+    document.querySelector('.order-user .bg-primary').addEventListener('click', function () {
+    $('#qrCodeModal').modal('show'); // Hiện modal
+    });
+
 </script>
