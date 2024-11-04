@@ -65,11 +65,10 @@
         </div>
 
         <div class="form-group">
-            <label>Media File</label>
-            <input type="file" asp-for="VideoFile" class="form-control" />
+            <label>Link phim</label>
+            <input asp-for="VideoFile" class="form-control" placeholder="Nhập đường dẫn" />
             <span asp-validation-for="VideoFile" class="text-danger"></span>
         </div>
-
         <div class="form-group">
             <label>Mô tả</label>
             <textarea asp-for="Description" class="form-control" rows="3" placeholder="Nhập mô tả"></textarea>

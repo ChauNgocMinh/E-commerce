@@ -9,7 +9,7 @@ namespace WatchMovie.Domain.ViewModel
         public string? Description { get; set; }
         public bool IsFree { get; set; }
         public Guid CategoryId { get; set; }
-        public IFormFile? VideoFile { get; set; } 
+        public string VideoFile { get; set; } 
         public IFormFile? MovieImgBanner { get; set; } 
     }
 }

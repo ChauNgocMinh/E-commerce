@@ -48,10 +48,27 @@
     </div>
     <div>
         <strong>Video:</strong>
-        <video width="100%" controls>
-            <source src="@Model.UrlMedia" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        @if (!string.IsNullOrWhiteSpace(Model.UrlMedia))
+        {
+            string embedUrl = Model.UrlMedia;
+            if (Model.UrlMedia.Contains("youtube.com/watch?v="))
+            {
+                var videoId = Model.UrlMedia.Split("v=")[1]; // Extracts the part after "v="
+                embedUrl = "https://www.youtube.com/embed/" + videoId;
+            }
+
+            <div style="width: 640px; height: 360px;">
+                <iframe width="640" height="360"
+                        src="@Model.UrlMedia"
+                        frameborder="0" allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        }
+        else
+        {
+            <p>No video available.</p>
+        }
     </div>
 
     <a asp-controller="MovieManagement" asp-action="MovieManagement" class="btn btn-secondary">Trở về</a>
