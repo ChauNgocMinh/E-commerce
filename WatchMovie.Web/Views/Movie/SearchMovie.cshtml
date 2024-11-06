@@ -5,23 +5,6 @@
 }
 <style>
 
-    .filter {
-        border: 1px solid black;
-        border-radius: 8px;
-        padding: 16px;
-        width: 200px;
-        height: fit-content;
-    }
-
-        .filter h4 {
-            margin-bottom: 12px;
-        }
-
-    .checkbox-group label {
-        display: block;
-        margin-bottom: 8px;
-    }
-
     .input-group .btn {
         border-radius: 0 25px 25px 0;
     }
@@ -99,22 +82,7 @@
 </style>
 <div style="margin-top: 50px" class="container-xxl">
     <div class="row justify-content-between">
-        <div class="filter ">
-            <h4>Filter Options</h4>
-            <div class="checkbox-group">
-                <label><input type="checkbox"> Option 1</label>
-                <label><input type="checkbox"> Option 2</label>
-                <label><input type="checkbox"> Option 3</label>
-                <label><input type="checkbox"> Option 4</label>
-            </div>
-            <h4>Filter Options</h4>
-            <div class="checkbox-group">
-                <label><input type="checkbox"> Option 1</label>
-                <label><input type="checkbox"> Option 2</label>
-                <label><input type="checkbox"> Option 3</label>
-                <label><input type="checkbox"> Option 4</label>
-            </div>
-        </div>
+        @await Html.PartialAsync("~/Views/Home/_FilterMovie.cshtml", ViewData["Categories"])
         <div class="conten-main col-10">
             <div class="row justify-content-between">
                 <div class="search-conten col-4">

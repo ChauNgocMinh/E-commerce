@@ -329,10 +329,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <video controls style="width: 100%; height: auto; object-fit: contain;">
-                        <source src="@Model.Movie.UrlMedia" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <iframe style="width: 100%; height: 100%; object-fit: contain;" src="@Model.Movie.UrlMedia" title="1/2 - Dangrangto, BIG WIND, Lee À | Official Lyrics Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -343,15 +340,12 @@
     <script>
     document.querySelectorAll('.rating input[type="radio"]').forEach(star => {
         star.addEventListener('click', function () {
-            // Lấy giá trị đánh giá
             const ratingValue = this.value;
-
-            // Cập nhật màu cho các sao dựa trên giá trị đánh giá
             document.querySelectorAll('.rating .star').forEach((star, index) => {
                 if (index < ratingValue) {
-                    star.style.color = '#f39c12'; // Màu cho sao được chọn
+                    star.style.color = '#f39c12'; 
                 } else {
-                    star.style.color = '#ccc'; // Màu cho sao không được chọn
+                    star.style.color = '#ccc'; 
                 }
             });
         });

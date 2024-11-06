@@ -70,7 +70,6 @@ namespace WatchMovie.Controllers.AdminSite
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateMovie(MovieViewModel model)
         {
-            // Ensure that a video URL has been provided
             if (string.IsNullOrWhiteSpace(model.VideoFile))
             {
                 ModelState.AddModelError("VideoUrl", "Link video không được để trống.");

@@ -41,23 +41,6 @@
         font-weight: bold;
     }
 
-    .filter {
-        border: 1px solid black;
-        border-radius: 8px;
-        padding: 16px;
-        width: 200px;
-        height: fit-content;
-    }
-
-    .filter h4 {
-        margin-bottom: 12px;
-    }
-
-    .checkbox-group label {
-        display: block;
-        margin-bottom: 8px;
-    }
-
     .input-group .btn {
         border-radius: 0 25px 25px 0; 
     }
@@ -99,30 +82,30 @@
     }
 
     .card {
-        border: 1px solid #000; /* Kẻ khung cho card */
-        border-radius: 8px; /* Bo góc cho card */
-        overflow: hidden; /* Giúp bo góc ảnh */
-        height: auto; /* Đặt chiều cao cho card */
+        border: 1px solid #000; 
+        border-radius: 8px;
+        overflow: hidden;
+        height: auto;
     }
 
     .card-img-top {
-        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của card */
-        height: 200px; /* Đặt chiều cao cố định cho ảnh */
-        object-fit: cover; /* Giữ tỉ lệ ảnh, cắt bớt nếu cần */
+        width: 100%; 
+        height: 200px; 
+        object-fit: cover; 
     }
 
     .title-movie {
-        white-space: nowrap; /* Không cho xuống dòng */
-        overflow: hidden; /* Ẩn phần không vừa */
-        text-overflow: ellipsis; /* Thêm dấu ba chấm khi cắt bớt */
-        max-width: 100%; /* Giới hạn chiều rộng tối đa */
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        max-width: 100%; 
     }
 
     .keyword-item {
-        white-space: nowrap; /* Không cho xuống dòng */
-        overflow: hidden; /* Ẩn phần không vừa */
-        text-overflow: ellipsis; /* Thêm dấu ba chấm khi cắt bớt */
-        max-width: 100%; /* Giới hạn chiều rộng tối đa */
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        max-width: 100%; 
     }
 
     .movie-cart {
@@ -137,29 +120,14 @@
     <img class="banner" src="./Img/banner.jpg" alt="Nonton Godzilla x Kong" />
     <div class="overlay">
         <h1>Nonton Godzilla x Kong</h1>
-        <p>Godzilla x Kong: Đế chế mới là một bộ phim điện ảnh Mỹ thuộc thể loại quái vật ra mắt năm 2024 được đạo diễn bởi Adam Wingard. Phim do hãng Legendary Pictures và Warner Bros.</p>
+        <p>Godzilla x Kong: Đế chế mới là một bộ phim điện ảnh Mỹ thuộc thể loại quái vật ra mắt năm 2024 được đạo diễn bởi Adam Wingard. Phim do hãng L+egendary Pictures và Warner Bros.</p>
         <button class="btn-watch">Xem ngay</button>
     </div>
 </div>
 
 <div style="margin-top: 50px" class="container-xxl">
     <div class="row justify-content-between">
-        <div class="filter ">
-            <h4>Filter Options</h4>
-            <div class="checkbox-group">
-                <label><input type="checkbox"> Option 1</label>
-                <label><input type="checkbox"> Option 2</label>
-                <label><input type="checkbox"> Option 3</label>
-                <label><input type="checkbox"> Option 4</label>
-            </div>
-            <h4>Filter Options</h4>
-            <div class="checkbox-group">
-                <label><input type="checkbox"> Option 1</label>
-                <label><input type="checkbox"> Option 2</label>
-                <label><input type="checkbox"> Option 3</label>
-                <label><input type="checkbox"> Option 4</label>
-            </div>
-        </div>
+        @await Html.PartialAsync("_FilterMovie", ViewData["Categories"])
         <div class="conten-main col-10">
             <div class="row justify-content-between">
                 <div class="search-conten col-4">

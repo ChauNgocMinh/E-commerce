@@ -14,21 +14,39 @@ namespace WatchMovie.Controllers.UserSite
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Movie> _MovieRepository;
         private readonly IGenericRepository<MovieFeedBack> _MovieFeedBackcontext;
+        private readonly IGenericRepository<MovieCategory> _movieCategoryRepository;
 
-        public MovieController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieFeedBack> MovieFeedBackcontext)
+        public MovieController(ILogger<HomeController> logger, IMapper mapper, IGenericRepository<Movie> MovieRepository, IGenericRepository<MovieFeedBack> MovieFeedBackcontext, IGenericRepository<MovieCategory> movieCategoryRepository)
         {
             _logger = logger;
             _mapper = mapper;
             _MovieRepository = MovieRepository;
             _MovieFeedBackcontext = MovieFeedBackcontext;
+            _movieCategoryRepository = movieCategoryRepository;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetMovieByCategory(string IdCateglory)
+        public async Task<IActionResult> GetMovieByCategory(List<Guid> categoryIds, string filmType)
         {
-            var Movies = await _MovieRepository.GetAllAsync(x => x.CategoryId == Guid.Parse(IdCateglory), include: query => query.Include(o => o.MovieImages));
-            var MovieResponses = _mapper.Map<List<MovieResponse>>(Movies);
-            return View(MovieResponses);
+            var movies = await _MovieRepository.GetAllAsync(x => true);
+            if (categoryIds != null && categoryIds.Any())
+            {
+                movies = movies.Where(movie => categoryIds.Contains(movie.CategoryId)).ToList();
+            }
+            if (!string.IsNullOrEmpty(filmType))
+            {
+                movies = movies.Where(movie =>
+                    (filmType == "free" && movie.IsFree) || (filmType == "paid" && !movie.IsFree)
+                ).ToList();
+            }
+            var movieResponses = _mapper.Map<List<MovieResponse>>(movies);
+
+            var categories = await _movieCategoryRepository.GetAllAsync();
+            var categoryResponses = _mapper.Map<List<MovieCategoryResponse>>(categories);
+            ViewData["Categories"] = categoryResponses;
+            return View(movieResponses);
         }
+
         [HttpGet]
         public async Task<IActionResult> SearchMovie(string query)
         {
@@ -37,6 +55,9 @@ namespace WatchMovie.Controllers.UserSite
                 include: q => q.Include(o => o.MovieImages)
             );
             var searchedMovieResponses = _mapper.Map<List<MovieResponse>>(searchedMovies);
+            var categories = await _movieCategoryRepository.GetAllAsync();
+            var categoryResponses = _mapper.Map<List<MovieCategoryResponse>>(categories);
+            ViewData["Categories"] = categoryResponses;
             return View(searchedMovieResponses);
         }
 

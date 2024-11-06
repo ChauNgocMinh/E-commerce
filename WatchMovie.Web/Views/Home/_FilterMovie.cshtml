@@ -1,0 +1,68 @@
+﻿@using WatchMovie.Application.Response.MovieResponse
+@model List<MovieCategoryResponse> 
+<style>
+    .filter {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        width: 220px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .filter h5 {
+        margin-bottom: 12px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .checkbox-group, .radio-group {
+        margin-bottom: 20px;
+    }
+
+    .checkbox-group label, .radio-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .search-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<form class="p-0" style="width: auto" method="get" action="@Url.Action("GetMovieByCategory", "Movie")">
+    <div class="filter">
+        <h5>Phim miễn phí?</h5>
+        <div class="radio-group">
+            <label><input type="radio" name="filmType" value="free"> Miễn phí</label>
+            <label><input type="radio" name="filmType" value="paid"> Trả phí</label>
+        </div>
+
+        <h5>Lọc theo thể loại</h5>
+        <div class="checkbox-group">
+            @foreach (var category in Model)
+            {
+                <label><input type="checkbox" name="categoryIds" value="@category.Id"> @category.Title</label>
+            }
+        </div>
+
+        <button class="search-btn">Lọc</button>
+    </div>
+</form>
