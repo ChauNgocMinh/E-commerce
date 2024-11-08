@@ -1,353 +1,353 @@
-﻿    @using WatchMovie.Application.Response.MovieResponse;
-    @inject UserService UserService
-    @model MovieDetailViewModel
+﻿@using WatchMovie.Application.Response.MovieResponse;
+@inject UserService UserService
+@model MovieDetailViewModel
 
-    @{
-        bool isVipUser = await UserService.IsVipAsync();
-        bool isMovieFree = Model.Movie.IsFree;
+@{
+    bool isVipUser = await UserService.IsVipAsync();
+    bool isMovieFree = Model.Movie.IsFree;
+}
+
+@{
+    ViewData["Title"] = "Movie Detail Page";
+        var reviews = new List<dynamic>
+        {
+            new { Title = "Review Title 1", Body = "Review Body 1", Name = "Review Name 1", Stars = 5, Image = "/userreview.png" },
+            new { Title = "Review Title 2", Body = "Review Body 2", Name = "Review Name 2", Stars = 4, Image = "/userreview.png" },
+            new { Title = "Review Title 3", Body = "Review Body 3", Name = "Review Name 3", Stars = 5, Image = "/userreview.png" }
+        };
+
+        var films = new List<dynamic>
+        {
+            new { Title = "Liên hoa lâu", Image = "/lienhoalau.png" },
+            new { Title = "Đường triều Qủy Sự Lục", Image = "/duongtrieuquysuluc.png" },
+            new { Title = "Nạn nhân không hoàn hảo", Image = "/nannhankhonghoanhao.jpg" },
+            new { Title = "Thợ săn tí hon", Image = "/thosantihon.png" }
+        };
+
+    }
+ 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
     }
 
-    @{
-        ViewData["Title"] = "Movie Detail Page";
-         var reviews = new List<dynamic>
-         {
-             new { Title = "Review Title 1", Body = "Review Body 1", Name = "Review Name 1", Stars = 5, Image = "/userreview.png" },
-             new { Title = "Review Title 2", Body = "Review Body 2", Name = "Review Name 2", Stars = 4, Image = "/userreview.png" },
-             new { Title = "Review Title 3", Body = "Review Body 3", Name = "Review Name 3", Stars = 5, Image = "/userreview.png" }
-         };
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 
-         var films = new List<dynamic>
-         {
-             new { Title = "Liên hoa lâu", Image = "/lienhoalau.png" },
-             new { Title = "Đường triều Qủy Sự Lục", Image = "/duongtrieuquysuluc.png" },
-             new { Title = "Nạn nhân không hoàn hảo", Image = "/nannhankhonghoanhao.jpg" },
-             new { Title = "Thợ săn tí hon", Image = "/thosantihon.png" }
-         };
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
 
-     }
- 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-        }
+    .rounded-3{
+        background-color: #2C2C2C;
+        color: white;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    .description-Right {
+        background-color: white;
+        color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px gray;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
+    .description-Right button {
+        background-color: #2C2C2C;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        transition: background-color 0.3s;
+    }
 
-        .rounded-3{
-            background-color: #2C2C2C;
-            color: white;
-        }
+    .description-Right button:hover {
+        background-color: #2C2C2C;
+    }
 
-        .description-Right {
-            background-color: #f9f9f9;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-        }
+    .custom-border {
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        background-color: white;
+    }
 
-        .description-Right button {
-            background-color: #2C2C2C;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: none;
-            transition: background-color 0.3s;
-        }
+    .review ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-        .description-Right button:hover {
-            background-color: #2C2C2C;
-        }
+    .review li {
+        flex: 0 0 30%;
+        margin: 0 10px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
-        .custom-border {
-            border: 1px solid black;
-            border-radius: 0.5rem;
-            background-color: white;
-        }
+    .review li:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
 
-        .review ul {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .review img {
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
-        .review li {
-            flex: 0 0 30%;
-            margin: 0 10px;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-        }
+    .filmRecommand h2 {
+        margin: 20px 0;
+        color: black;
+        font-weight: bold;
+    }
 
-        .review li:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        }
+    .filmRecommand ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
 
-        .review img {
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    .filmRecommand li {
+        flex: 1 1 200px;
+        margin: 10px;
+        max-width: 250px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        .filmRecommand h2 {
-            margin: 20px 0;
-            color: black;
-            font-weight: bold;
-        }
+    .filmRecommand li:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    }
 
-        .filmRecommand ul {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 0;
-        }
+    .filmRecommand img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .filmRecommand li {
-            flex: 1 1 200px;
-            margin: 10px;
-            max-width: 250px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .filmRecommand h7 {
+        font-weight: bold;
+        color: #555;
+    }
 
-        .filmRecommand li:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-        }
+    .btn-close {
+        width: 33px;
+        border: none;
+        background: #dc3545;
+        color: white;
+        border-radius: 2px;
+    }
 
-        .filmRecommand img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .Tag p{
+        background: #CFF7D3;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        font-size: 17px;
+        display: inline-block;
+    }
 
-        .filmRecommand h7 {
-            font-weight: bold;
-            color: #555;
-        }
+    .modal-dialog {
+        max-width: 800px;
+        width: 100%;
+    }
 
-        .btn-close {
-            width: 33px;
-            border: none;
-            background: #dc3545;
-            color: white;
-            border-radius: 2px;
-        }
+    .modal-content {
+        height: 450px;
+        overflow: hidden; 
+    }
 
-        .Tag p{
-            background: #CFF7D3;
-            border-radius: 10px;
-            padding: 5px 10px;
-            margin-bottom: 10px;
-            font-size: 17px;
-            display: inline-block;
-        }
+    .modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 326px;
+    }
+    video {
+        max-width: 100%; 
+        max-height: 100%; 
+    }
 
-        .modal-dialog {
-            max-width: 800px;
-            width: 100%;
-        }
+    .rating {
+        display: flex;
+        direction: row-reverse; /* Reverse the order */
+    }
 
-        .modal-content {
-            height: 450px;
-            overflow: hidden; 
-        }
+    .rating input {
+        display: none; /* Hide the radio buttons */
+    }
 
-        .modal-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 326px;
-        }
-        video {
-            max-width: 100%; 
-            max-height: 100%; 
-        }
+    .rating label {
+        font-size: 30px; /* Size of stars */
+        color: #ccc; /* Default color for stars */
+        cursor: pointer; /* Cursor style when hovering */
+        transition: color 0.3s; /* Color transition effect */
+    }
 
-        .rating {
-            display: flex;
-            direction: row-reverse; /* Reverse the order */
-        }
+    /* Light up stars on checked state */
+    .rating input[type="radio"]:checked ~ label {
+        color: #f39c12; /* Color for selected stars */
+    }
 
-        .rating input {
-            display: none; /* Hide the radio buttons */
-        }
+    /* Light up all stars up to the checked one */
+    .rating input[type="radio"]:checked + label {
+        color: #f39c12; /* Color for selected star */
+    }
 
-        .rating label {
-            font-size: 30px; /* Size of stars */
-            color: #ccc; /* Default color for stars */
-            cursor: pointer; /* Cursor style when hovering */
-            transition: color 0.3s; /* Color transition effect */
-        }
+    .rating input[type="radio"]:checked + label ~ label {
+        color: #f39c12; /* Color for all previous stars */
+    }
 
-        /* Light up stars on checked state */
-        .rating input[type="radio"]:checked ~ label {
-            color: #f39c12; /* Color for selected stars */
-        }
-
-        /* Light up all stars up to the checked one */
-        .rating input[type="radio"]:checked + label {
-            color: #f39c12; /* Color for selected star */
-        }
-
-        .rating input[type="radio"]:checked + label ~ label {
-            color: #f39c12; /* Color for all previous stars */
-        }
-
-        /* Hover effect for stars */
-        .rating label:hover,
-        .rating label:hover ~ label {
-            color: #f39c12; /* Color for stars on hover */
-        }
+    /* Hover effect for stars */
+    .rating label:hover,
+    .rating label:hover ~ label {
+        color: #f39c12; /* Color for stars on hover */
+    }
 
 
-    </style>
+</style>
 
 
-    <div class="container mt-5">
-        <div class="description row justify-content-center">
-            <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
-                <img src="@Model.Movie.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover; border-radius: 10px;" alt="" />
-            </div>
+<div class="container mt-5">
+    <div class="description row justify-content-center">
+        <div class="description-Left col-md-6 col-sm-12" style="position: relative;">
+            <img src="@Model.Movie.MainImageUrl" style="width: 100%; max-height: 500px; height: auto; object-fit: cover; border-radius: 10px;" alt="" />
+        </div>
 
-            <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
-                <h3 style="font-weight: bold;">@Model.Movie.Name</h3>
-                <div class="Tag"><p>Tag</p></div>
-                <ul class="list-unstyled d-flex">
-                    <li class="me-2 p-2 rounded-3">Cổ trang</li>
-                    <li class="me-2 p-2 rounded-3">Hành động</li>
-                    <li class="me-2 p-2 rounded-3">120 phút</li>
-                </ul>
-                @if (isMovieFree || isVipUser)
-                {
-                    <button data-toggle="modal" data-target="#videoModal">Xem ngay</button>
-                }
-                else
-                {
-                    <span>Chỉ dành cho tài khoản VIP</span>
-                }
-                <div class="custom-border p-3 mt-3">
-                    <h4>Giới thiệu</h4>
-                    @Model.Movie.Description
-                </div>
+        <div class="description-Right col-md-6 col-sm-12 d-flex flex-column ">
+            <h3 style="font-weight: bold;">@Model.Movie.Name</h3>
+            <div class="Tag"><p>Tag</p></div>
+            <ul class="list-unstyled d-flex">
+                <li class="me-2 p-2 rounded-3">Cổ trang</li>
+                <li class="me-2 p-2 rounded-3">Hành động</li>
+                <li class="me-2 p-2 rounded-3">120 phút</li>
+            </ul>
+            @if (isMovieFree || isVipUser)
+            {
+                <button data-toggle="modal" data-target="#videoModal">Xem ngay</button>
+            }
+            else
+            {
+                <span>Chỉ dành cho tài khoản VIP</span>
+            }
+            <div class="custom-border p-3 mt-3">
+                <h4>Giới thiệu</h4>
+                @Model.Movie.Description
             </div>
         </div>
-        <div id="comment-section" class="mt-4">
-            @if (User.Identity.IsAuthenticated)
+    </div>
+    <div id="comment-section" class="mt-4">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!Model.UserHasRated)
             {
-                if (!Model.UserHasRated)
-                {
-                    <h4>Đánh giá của bạn</h4>
-                    <form asp-action="PostFeedback" asp-controller="Movie" method="post">
-                        <input type="hidden" name="MovieId" value="@Model.Movie.Id" />
+                <h4>Đánh giá của bạn</h4>
+                <form asp-action="PostFeedback" asp-controller="Movie" method="post">
+                    <input type="hidden" name="MovieId" value="@Model.Movie.Id" />
+                    <div class="form-group">
                         <div class="form-group">
-                            <div class="form-group">
-                                <label for="rating">Đánh giá</label>
-                                <div class="rating">
-                                    <input type="radio" id="star1" name="Rating" value="1" />
-                                    <label for="star1" class="star">&#9733;</label>
-                                    <input type="radio" id="star2" name="Rating" value="2" />
-                                    <label for="star2" class="star">&#9733;</label>
-                                    <input type="radio" id="star3" name="Rating" value="3" />
-                                    <label for="star3" class="star">&#9733;</label>
-                                    <input type="radio" id="star4" name="Rating" value="4" />
-                                    <label for="star4" class="star">&#9733;</label>
-                                    <input type="radio" id="star5" name="Rating" value="5" />
-                                    <label for="star5" class="star">&#9733;</label>
-                                </div>
+                            <label for="rating">Đánh giá</label>
+                            <div class="rating">
+                                <input type="radio" id="star1" name="Rating" value="1" />
+                                <label for="star1" class="star">&#9733;</label>
+                                <input type="radio" id="star2" name="Rating" value="2" />
+                                <label for="star2" class="star">&#9733;</label>
+                                <input type="radio" id="star3" name="Rating" value="3" />
+                                <label for="star3" class="star">&#9733;</label>
+                                <input type="radio" id="star4" name="Rating" value="4" />
+                                <label for="star4" class="star">&#9733;</label>
+                                <input type="radio" id="star5" name="Rating" value="5" />
+                                <label for="star5" class="star">&#9733;</label>
                             </div>
                         </div>
-                        <div class="form-group mt-3">
-                            <label for="comment">Bình luận của bạn</label>
-                            <textarea id="comment" class="form-control" rows="4" name="Comment" placeholder="Viết bình luận..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3">Gửi đánh giá</button>
-                    </form>
-                }
-                else
-                {
-                    <p>Bạn đã đánh giá bộ phim này rồi. Cảm ơn bạn!</p>
-                }
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="comment">Bình luận của bạn</label>
+                        <textarea id="comment" class="form-control" rows="4" name="Comment" placeholder="Viết bình luận..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Gửi đánh giá</button>
+                </form>
             }
             else
             {
-                <p>Vui lòng <a style="color: #0a58ca;" href="/User/Login">đăng nhập</a> để gửi đánh giá.</p>
+                <p>Bạn đã đánh giá bộ phim này rồi. Cảm ơn bạn!</p>
             }
-        </div>
-
-
-        <!-- Đánh giá -->
-        <div id="feedback-section" class="mt-4">
-            @if (Model.Feedbacks != null && Model.Feedbacks.Any())
-            {
-                @await Html.PartialAsync("_MovieFeedback", Model.Feedbacks)
-            }
-            else
-            {
-                <p>Hiện tại chưa có đánh giá nào.</p>
-            }
-        </div>
-
-
-        <!-- Phim gợi ý -->
-        <div class="filmRecommand align-content-center">
-            <h2 class="text-center">Có thể bạn sẽ thích</h2>
-            <ul class="list-unstyled d-flex flex-wrap justify-content-center">
-                @foreach (var film in films)
-                {
-                    <li class="me-2 p-2 rounded-3 custom-border">
-                        <img src="@film.Image" alt="@film.Title" style="max-width: 100%; height: auto;" />
-                        <h7>@film.Title</h7>
-                    </li>
-                }
-            </ul>
-        </div>
+        }
+        else
+        {
+            <p>Vui lòng <a style="color: #0a58ca;" href="/User/Login">đăng nhập</a> để gửi đánh giá.</p>
+        }
     </div>
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">Xem Video</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <iframe style="width: 100%; height: 100%; object-fit: contain;" src="@Model.Movie.UrlMedia" title="1/2 - Dangrangto, BIG WIND, Lee À | Official Lyrics Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                </div>
+
+
+    <!-- Đánh giá -->
+    <div id="feedback-section" class="mt-4">
+        @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+        {
+            @await Html.PartialAsync("_MovieFeedback", Model.Feedbacks)
+        }
+        else
+        {
+            <p>Hiện tại chưa có đánh giá nào.</p>
+        }
+    </div>
+
+
+    <!-- Phim gợi ý -->
+    <div class="filmRecommand align-content-center">
+        <h2 class="text-center">Có thể bạn sẽ thích</h2>
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+            @foreach (var film in films)
+            {
+                <li class="me-2 p-2 rounded-3 custom-border">
+                    <img src="@film.Image" alt="@film.Title" style="max-width: 100%; height: auto;" />
+                    <h7>@film.Title</h7>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Xem Video</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <iframe style="width: 100%; height: 100%; object-fit: contain;" src="@Model.Movie.UrlMedia" title="1/2 - Dangrangto, BIG WIND, Lee À | Official Lyrics Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
-    <script>
-    document.querySelectorAll('.rating input[type="radio"]').forEach(star => {
-        star.addEventListener('click', function () {
-            const ratingValue = this.value;
-            document.querySelectorAll('.rating .star').forEach((star, index) => {
-                if (index < ratingValue) {
-                    star.style.color = '#f39c12'; 
-                } else {
-                    star.style.color = '#ccc'; 
-                }
-            });
+</div>
+<script>
+document.querySelectorAll('.rating input[type="radio"]').forEach(star => {
+    star.addEventListener('click', function () {
+        const ratingValue = this.value;
+        document.querySelectorAll('.rating .star').forEach((star, index) => {
+            if (index < ratingValue) {
+                star.style.color = '#f39c12'; 
+            } else {
+                star.style.color = '#ccc'; 
+            }
         });
     });
-    </script>
+});
+</script>
